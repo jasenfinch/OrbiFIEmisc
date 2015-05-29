@@ -1,9 +1,7 @@
-rfimport_plot <-
-function(x,dn,Path,DF){		# Plotting function for rfimport
-  if(!file.exists(paste(Path,DF,paste(DF,"Classification_&_Feature_Selection",sep="_"),sep="/"))){
-    dir.create(paste(Path,DF,paste(DF,"Classification_&_Feature_Selection",sep="_"),sep="/"))
-  }
-	suppressPackageStartupMessages(library(ggplot2))
+# Plotting function for rfImportance
+
+rfImportancePlot <-
+function(x,dn,Path,DF){		
 	stats <- data.frame(x)
 	stats[,ncol(stats)+1] <- seq(1,nrow(stats)) 
 	stats[,ncol(stats)] <- as.factor(stats[,ncol(stats)])

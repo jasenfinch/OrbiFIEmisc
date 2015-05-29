@@ -1,4 +1,6 @@
-rem.trk <-
+
+
+removeSig <-
 function(peak.mat,out_path){ # remove top ranked signals
 	fs_out <- read.table(file=out_path, sep=",",
                      na.strings = "", stringsAsFactors=F, head=T)

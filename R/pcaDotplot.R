@@ -1,5 +1,7 @@
-pca.dotplot <-
-function(pca.vars,dn,Path,DF,HPC_mode=F){  # PCA variance dotplot using ggplot2
+#' PCA variance dotplot using ggplot2
+
+pcaDotplot <-
+function(pca.vars,dn,Path,DF,HPC_mode=F){
 	.e = environment()
 	rownames(pca.vars) <- dn
 	pca.vars <- t(pca.vars)

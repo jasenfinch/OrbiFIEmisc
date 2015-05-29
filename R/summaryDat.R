@@ -1,5 +1,7 @@
-summarySE <-
-function(data=NULL, measurevar, groupvars=NULL, na.rm=FALSE,conf.interval=.95, .drop=TRUE) {	# Function for calculating confidence intervals and errors for plots
+#' Function for calculating confidence intervals and errors for plots
+
+summaryDat <-
+function(data=NULL, measurevar, groupvars=NULL, na.rm=FALSE,conf.interval=.95, .drop=TRUE) {
   suppressMessages(require(plyr))
   length2 <- function (x, na.rm=FALSE) {
     if (na.rm) sum(!is.na(x))

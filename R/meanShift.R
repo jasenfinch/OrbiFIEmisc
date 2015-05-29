@@ -1,4 +1,6 @@
-mean.shift <-
+
+
+meanShift <-
 function(x,y, method="mean", log.f=FALSE)
 {
   x   <- as.data.frame(x)

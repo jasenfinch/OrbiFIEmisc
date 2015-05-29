@@ -1,10 +1,7 @@
-plot.bin <-
-function(master_mat,masses,Path,DF){ # Plot peak intensities for a 2dp mass bins for all classes
-	if(!file.exists(paste(Path,DF,paste(DF,"Bin_Plots",sep="_"),sep="/"))){
-    dir.create(paste(Path,DF,paste(DF,"Bin_Plots",sep="_"),sep="/"))
-	}
-  library(reshape2)
-  suppressPackageStartupMessages(library(ggplot2))
+#' Plot peak intensities for a 2dp mass bins for all classes
+
+plotBin <-
+function(master_mat,masses,Path,DF){
   for (i in 1:length(masses)){
 		mass <- masses[[i]]
 		mass.1 <- masses[[i]]

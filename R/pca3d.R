@@ -1,9 +1,11 @@
-pca.3d <-
+
+
+pca3d <-
 function(dn,dat.all,cls,info.class) {
 	library(rgl)
 	colour <- seq(1,length(unique(info.class)))
 	pca <- lapply(dn, function(x) {
-  	pca  <- pca.comp(dat.all[[x]], scale=F, pcs=1:3)
+  	pca  <- pcaComp(dat.all[[x]], scale=F, pcs=1:3)
     scores <- cbind(pca$scores, y=cls,type=rep(x, nrow(dat.all[[x]])))
     list(scores=scores, vars=pca$vars)
   })

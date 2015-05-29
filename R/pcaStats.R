@@ -1,10 +1,9 @@
-pca.stats <-
+
+
+pcaStats <-
 function(dn,dat.all,cls,Path,DF){
-  if(!file.exists(paste(Path,DF,paste(DF,"PCA_&_LDA",sep="_"),sep="/"))){
-    dir.create(paste(Path,DF,paste(DF,"PCA_&_LDA",sep="_"),sep="/"))
-  }
 	pca <- lapply(dn, function(x) {
-      pca  <- pca.comp(dat.all[[x]], scale=F, pcs=1:3)
+      pca  <- pcaComp(dat.all[[x]], scale=F, pcs=1:3)
       scores <- cbind(pca$scores, y=cls,type=rep(x, nrow(dat.all[[x]])))
       list(scores=scores, vars=pca$vars)
     })

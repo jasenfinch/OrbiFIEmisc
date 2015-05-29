@@ -1,5 +1,7 @@
-occ.mat <-
-function(dat,cls){		# builds occupancy matrix by class
+#' builds occupancy matrix by class
+
+occMat <-
+function(dat,cls){
 	cls.1 <- unique(cls)
 	mat <- matrix(0,nrow=length(cls.1),ncol=(ncol(dat)))
 	for (i in 1:length(cls.1)){

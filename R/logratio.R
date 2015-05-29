@@ -1,4 +1,6 @@
-logratio <-
+
+
+logRatio <-
 function(x,info) {
   me <- aggregate(x,by=list(info$genos),mean)
   rownames(me) <- me$Group.1

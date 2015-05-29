@@ -2,9 +2,6 @@
 
 ldaStats <-
 function(dn,dat.all,cls,Path,DF){
-  if(!(file.exists(paste(Path,DF,paste(DF,"PCA_&_LDA",sep="_"),sep="/")))){
-    dir.create(paste(Path,DF,paste(DF,"PCA_&_LDA",sep="_"),sep="/"))
-  }
     pcalda <- lapply(dn, function(x) {
       res <- nlda(dat.all[[x]],cls)
       dfs <- as.data.frame(res$x)

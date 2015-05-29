@@ -1,4 +1,6 @@
-pca.comp <-
+
+
+pcaComp <-
 function(x, scale=FALSE, pcs=1:2,...)
 {
   pca  <- prcomp(x, scale=scale)

@@ -1,5 +1,7 @@
-master.mat <-
-function(master_mix,cls){ 	# to build mean intensity matrices  by class including nominal and 2dp bins
+#' to build mean intensity matrices  by class including nominal and 2dp bins
+
+masterMat <-
+function(master_mix,cls){
 		mat.p <- master_mix[[1]]
 		mat.n <- master_mix[[2]]
 		mass.p <- gsub("p","",colnames(mat.p))

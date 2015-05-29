@@ -1,5 +1,7 @@
-scale.ss <-
-function(data){		# to scale varibles to their sum of squares
+#' to scale varibles to their sum of squares
+
+scaleSS <-
+function(data){		
 	data.1 <- NULL
 	norm.dat <- NULL
 	norm.dat.1 <- NULL

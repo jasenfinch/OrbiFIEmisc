@@ -1,4 +1,6 @@
-corr.analysis <-
+
+
+corrAnalysis <-
 function(fs.ord,n,cutoff,Path,DF){
 	ord    <- lapply(fs.ord, function(x) lapply(x, function(y) y[1:n]))
 	fs.num <- lapply(ord, function(x) sapply(x, length))
@@ -11,7 +13,7 @@ function(fs.ord,n,cutoff,Path,DF){
   	  fs      <- ord[[i]][[j]]
    	 pdf(file = paste(Path,DF,paste(DF,"Correlation_Analysis",sep="_"),paste(DF,fs.num[[i]][[j]],i,j,"cluster_plot_re.pdf", sep="_"),sep="/"),
    	            onefile = T)
-   	 res.cor <- fs.cor.vec(dat.com, fs, cutoff,
+   	 res.cor <- corVec(dat.com, fs, cutoff,
    	                       fig.title=paste(DF,fs.num[[i]][[j]],i,j,sep="_"))
    	 dev.off()
    	 my.save.tab(shrink.list(my.unlist(res.cor)),

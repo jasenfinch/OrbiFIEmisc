@@ -1,5 +1,7 @@
-master.mix <-
-function(peak.mat,cls){		# to build mean intensity matrices  by class
+#' Build mean intensity matrices  by class.
+
+masterMix <-
+function(peak.mat,cls){
 	cls.1 <- unique(cls)
 	master.mat <- NULL
 	for (i in 1:length(peak.mat)){

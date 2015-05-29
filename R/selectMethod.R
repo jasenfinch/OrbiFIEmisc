@@ -1,5 +1,7 @@
-select.method <-
-function(stats.1,meth){ # pick out individual method from agg feature lists
+#' pick out individual method from agg feature lists
+
+selectMethod <-
+function(stats.1,meth){
 	nm <- names(stats.1)
 	c <- grep(meth,nm,fixed=TRUE)
 	stats.2 <- data.frame(stats.1[,c])

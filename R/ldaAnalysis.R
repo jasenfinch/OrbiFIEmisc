@@ -2,13 +2,14 @@
 
 ldaAnalysis <-
 function(dat.all,cls,Path,DF,cls.1=NULL,HPC_mode=F){
-	suppressMessages(library(ggplot2))
-	library(reshape2)
-	if(!file.exists(paste(Path,DF,paste(DF,"PCA_&_LDA",sep="_"),sep="/"))){
-	  dir.create(paste(Path,DF,paste(DF,"PCA_&_LDA",sep="_"),sep="/"))
-	}
 	dn <- names(dat.all)
-	pcalda.1 <- pcalda(dat.all,dn,cls)
+	 pcalda <- lapply(dn, function(x) {
+    res <- nlda(dat.all[[x]],cls)
+    dfs <- as.data.frame(res$x)
+    dfs <- cbind(dfs, y=cls,type=rep(x, nrow(dat.all[[x]])))
+    list(dfs=dfs, eig=res$Tw)
+  })
+  names(pcalda) <- dn
   lda.dfs <- do.call(rbind, lapply(pcalda.1, function(x) x$dfs))
  lda.eig <- do.call(rbind, lapply(pcalda.1, function(x) x$eig))
  if (length(unique(cls))<3){

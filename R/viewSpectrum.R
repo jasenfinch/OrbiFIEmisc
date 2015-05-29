@@ -1,5 +1,7 @@
-view.spectrum.1 <-
-function(mat,class,mode,type="l"){ # view zoom able spectrum. double click to zoom out. 2 single clicks over range to zoom in. 
+#' view zoom able spectrum. double click to zoom out. 2 single clicks over range to zoom in.
+
+viewSpectrum <-
+function(mat,class,mode,type="l"){ 
 	if (mode =="pos"){
 		dat <- mat[[1]]
 		sig <- as.numeric(gsub("p","",colnames(dat)))

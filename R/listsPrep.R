@@ -5,12 +5,12 @@ function(fs.res,DF,meth,sel,cut,dn){
 	fs.rank  <- lapply(fs.res, function(x) lapply(x, function(y) y$fs.rank))
 	fs.ord   <- lapply(fs.rank, function(x) lapply(x, function(y) fs.agg(y)$fs.order))
 	stats <- data.frame(fs.tab.1(fs.res,fs.ord,DF))
-	stats <- select.method(stats,meth)
+	stats <- selectMethod(stats,meth)
 	if(length(sel)>0){
-	stats <- lists.spec(stats,sel)
+	stats <- listsSpec(stats,sel)
 	}
-	stats <- lists.order(stats)
-	stats <- lists.sig(stats,cut,meth)
+	stats <- listsOrder(stats)
+	stats <- listsSig(stats,cut,meth)
 	stats <- stats[,seq(1,ncol(stats),2)]
 	stats <- lapply(dn,function(x){list(select.method(stats,x))})
 	masses <- lapply(stats,col.exp.masses)

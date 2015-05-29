@@ -1,5 +1,7 @@
-out.det <-
-function(x,samp.names, method = "classical", conf.level = 0.975, dimen=c(1,2), tol = 1e-7, plotting = TRUE){ # changed so that actual sample labels used
+#' changed so that actual sample labels used
+
+outDet <-
+function(x,samp.names, method = "classical", conf.level = 0.975, dimen=c(1,2), tol = 1e-7, plotting = TRUE){ 
 
   ## -------------------------------------------------------------
   ## Plot Mahalanobis distances against the index of data set.   

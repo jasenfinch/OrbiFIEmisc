@@ -2,7 +2,7 @@
 
 heatmapRatios <-
 function(dat.all,dn,masses,info,rel=F){
-	dat.all.one <- dat_all_comb(dat.all,dn)
+	dat.all.one <- datAllComb(dat.all,dn)
 	dat.all.one <- data.frame(dat.all.one)
 	names(dat.all.one) <- gsub("pn.","",names(dat.all.one))
 	data <- NULL
@@ -11,9 +11,9 @@ function(dat.all,dn,masses,info,rel=F){
 	dat <- pick(dat.all.one,a) 
 	data[i] <- list(dat)
 	}
-	log.data <- lapply(data,logratio,info)
+	log.data <- lapply(data,logRatio,info)
 	if (rel){
-		log.data <- lapply(log.data,scale.ss)
+		log.data <- lapply(log.data,scaleSS)
 	}
 	names(log.data) <- dn
 	for (i in 1:length(log.data)){

@@ -2,9 +2,6 @@
 
 hcaPlot <-
 function(dn,dat.all,cls,Path,DF,HPC_mode=F){
-  if(!file.exists(paste(Path,DF,paste(DF,"HCA",sep="_"),sep="/"))){
-    dir.create(paste(Path,DF,paste(DF,"HCA",sep="_"),sep="/"))
-  }
  for (i in 1:length(dn)) {
     ldamod <- nlda(dat.all[[i]],cls)
     if (HPC_mode==T){

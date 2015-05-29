@@ -1,4 +1,6 @@
-shrink.list <-
+
+
+shrinkList <-
 function(x.list){
   id <- sapply(x.list, function(x){if(!all(is.na(x))) TRUE else FALSE})
   if (all(id==FALSE)) {

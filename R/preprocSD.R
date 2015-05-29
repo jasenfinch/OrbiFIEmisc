@@ -1,4 +1,6 @@
-preproc.sd <-
+
+
+preprocSD <-
 function(dat, cl=NULL)
 {
   if (is.null(cl)) {
