@@ -16,7 +16,7 @@ function(fs.ord,n,cutoff,Path,DF){
    	 res.cor <- corVec(dat.com, fs, cutoff,
    	                       fig.title=paste(DF,fs.num[[i]][[j]],i,j,sep="_"))
    	 dev.off()
-   	 my.save.tab(shrink.list(my.unlist(res.cor)),
+   	 saveTab(shrinkList(unList(res.cor)),
     	            filename=paste(Path,DF,paste(DF,"Correlation_Analysis",sep="_"),paste(DF, fs.num[[i]][[j]],i,j,"fs.cor.re.csv",
       	                         sep='_'),sep="/"),
       	          firstline=paste('\nCorrelation analysis', DF,fs.num[[i]][[j]],

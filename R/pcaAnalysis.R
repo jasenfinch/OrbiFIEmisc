@@ -1,9 +1,9 @@
 #' wrapper function for PCA plotting, returns a list containg results
 
-pcaAnalysis <- function(dat.all,dn,cls,Path,DF,cls.1=NULL){
+pcaAnalysis <- function(dat.all,cls,Path,DF,cls.1=NULL,HPC_mode=F){
 	dn <- names(dat.all)
 	pca.1 <- lapply(dn, function(x) {
-    	pca  <- pca.comp(dat.all[[x]], scale=F, pcs=1:8)
+    	pca  <- pcaComp(dat.all[[x]], scale=F, pcs=1:8)
    	 scores <- cbind(pca$scores, y=cls,type=rep(x, nrow(dat.all[[x]])))
    	 list(scores=scores, vars=pca$vars)
   })

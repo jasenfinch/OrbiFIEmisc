@@ -1,6 +1,6 @@
 #' Order importance scores of feature lists
 
-listOrder <-
+listsOrder <-
 function(stats.2) {
   s <- seq(1, length(names(stats.2)), 2)
   stats.3 <- NULL

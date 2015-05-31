@@ -12,8 +12,8 @@ function(fs.res,DF,meth,sel,cut,dn){
 	stats <- listsOrder(stats)
 	stats <- listsSig(stats,cut,meth)
 	stats <- stats[,seq(1,ncol(stats),2)]
-	stats <- lapply(dn,function(x){list(select.method(stats,x))})
-	masses <- lapply(stats,col.exp.masses)
+	stats <- lapply(dn,function(x){list(selectMethod(stats,x))})
+	masses <- lapply(stats,colExpMasses)
 	names(masses) <- dn
 	return(masses)
 }

@@ -10,8 +10,8 @@ function(dat.all,cls,Path,DF,cls.1=NULL,HPC_mode=F){
     list(dfs=dfs, eig=res$Tw)
   })
   names(pcalda) <- dn
-  lda.dfs <- do.call(rbind, lapply(pcalda.1, function(x) x$dfs))
- lda.eig <- do.call(rbind, lapply(pcalda.1, function(x) x$eig))
+  lda.dfs <- do.call(rbind, lapply(pcalda, function(x) x$dfs))
+ lda.eig <- do.call(rbind, lapply(pcalda, function(x) x$eig))
  if (length(unique(cls))<3){
  	ldaStrip(lda.dfs,lda.eig,dn,Path,DF,HPC_mode=HPC_mode)
  } else {

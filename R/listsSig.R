@@ -1,6 +1,6 @@
 #' Choose only significant features.
 
-listSig <-
+listsSig <-
 function(stats.3,thres,meth){
   s <- seq(1, length(names(stats.3)), 2)
   stats.4 <- NULL

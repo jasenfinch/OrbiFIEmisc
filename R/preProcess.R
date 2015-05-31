@@ -1,7 +1,7 @@
 
 
 preProcess <-
-function(x,cls.1=cls,bat.1=bat,srce.1=srce,out_id.1=out_id,out_idx.1=out_idx){
+function(x,cls.1=cls,bat.1=bat,out_id.1=out_id,out_idx.1=out_idx){
 	dat <- x;
 	if (length(out_id.1)>0){
 		dat <- dat[-out_id.1,,drop=F]
