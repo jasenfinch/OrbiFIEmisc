@@ -4,7 +4,7 @@
 \alias{rfImportance}
 \title{function to plot RF importance curves}
 \usage{
-rfImportance(fs.res, dn, sel, Path, DF, meth = "rf")
+rfImportance(fs.res, dn, sel, Path, DF, meth = "rf", HPC_mode = F)
 }
 \description{
 function to plot RF importance curves

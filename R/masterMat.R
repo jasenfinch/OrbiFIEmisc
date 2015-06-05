@@ -2,21 +2,22 @@
 
 masterMat <-
 function(master_mix,cls){
-		mat.p <- master_mix[[1]]
-		mat.n <- master_mix[[2]]
-		mass.p <- gsub("p","",colnames(mat.p))
-		mass.n <- gsub("n","",colnames(mat.n))
-		mass.p <- as.numeric(mass.p)
-		mass.n <- as.numeric(mass.n)
-		mass.p.0 <- round(mass.p,0)
-		mass.n.0 <- round(mass.n,0)
-		mass.p.1 <- round(mass.p,1)
-		mass.n.1 <- round(mass.n,1)
-		mass.p.2 <- round(mass.p,2)
-		mass.n.2 <- round(mass.n,2)
-		master.mat.p <- t(rbind(mass.p.0,mass.p.1,mass.p.2,mass.p,mat.p))
-		master.mat.n <- t(rbind(mass.n.0,mass.n.1,mass.n.2,mass.n,mat.n))
-		colnames(master.mat.p)[5:ncol(master.mat.p)] <- unique(as.character(cls))
-		colnames(master.mat.n)[5:ncol(master.mat.n)] <- unique(as.character(cls))
-		master.mat <- list(master.mat.p,master.mat.n)
+  master.mix <- list()
+	for(i in 1:length(master_mix)){
+    mat <- master_mix[[i]]
+    if (grepl("p",colnames(mat)[1])==T){
+		  mass <- gsub("p","",colnames(mat))
+		}
+		if (grepl("n",colnames(mat)[1])==T){
+		  mass <- gsub("n","",colnames(mat))
+		}
+		mass <- as.numeric(mass)
+		mass.0 <- round(mass,0)
+		mass.1 <- round(mass,1)
+		mass.2 <- round(mass,2)
+		master.mat <- t(rbind(mass.0,mass.1,mass.2,mass,mat))
+		colnames(master.mat)[5:ncol(master.mat)] <- unique(as.character(cls))
+		master.mix[[i]] <- master.mat
+	}
+  return(master.mix)
 }
