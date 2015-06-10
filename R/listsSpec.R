@@ -1,6 +1,6 @@
 #' Select specific feature lists
 
-listSpec <-
+listsSpec <-
 function (stats.3,sel){
   stats.4 <- NULL
   nam <- names(stats.3)
