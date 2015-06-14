@@ -10,6 +10,7 @@ function(annot_all,Path,DF,j.mem = "10g",plots=F){
 	for (i in 1:length(annot_all)){
 	  sheet <- createSheet(wb, sheetName = names(annot_all)[i])
 	  annot_cur <- annot_all[[i]]
+	  annot_cur <- apply(annot_cur,2,as.character)
 	  # get bin labels present in the sheet
 	  bins <- unique(annot_cur[,1])
 	  bins[bins==""] <- NA
@@ -47,7 +48,7 @@ function(annot_all,Path,DF,j.mem = "10g",plots=F){
 		  }
 		  # Add in picutres
 		  for (x in 1:length(bins)){
-		    pos.bin[i] <- which(annot_cur[,1]==bins[x])
+		    pos.bin[x] <- which(annot_cur[,1]==bins[x])
 		  }
 		  pos.bin <- unlist(pos.bin)
 		  for (x in 1:length(bins)){
@@ -59,7 +60,12 @@ function(annot_all,Path,DF,j.mem = "10g",plots=F){
 		    }
 		  }
 	  }
-	  print(pos.bin)
+	  # add column names to first row
+	  annot_cur <- rbind(colnames(annot_cur),annot_cur)
+	  for (x in 1:length(bins)){
+	    pos.bin[x] <- which(annot_cur[,1]==bins[x])
+	  }
+	  pos.bin <- unlist(pos.bin)
 	  # set cell alignment, style and add data to workbook
 	  cb <- CellBlock(sheet, 1, 1, nrow(annot_cur), ncol(annot_cur))
 	  CB.setMatrixData(cb, annot_cur, 1, 1,cellStyle=cell.style)
@@ -67,6 +73,8 @@ function(annot_all,Path,DF,j.mem = "10g",plots=F){
 	  # calculate rows and columns of borders
 	  cols <- colnames(annot_cur)
 	  sec.pos <- lapply(names(sec.colour),function(x,y){return(grep(x,y))},y=cols)
+	  sec.pos <- lapply(sec.pos,function(x){if(length(x)>0){return(x)}})
+	  sec.pos <- sec.pos[!sapply(sec.pos,is.null)]
 	  # add borders
 	  border.r <- Border(position="RIGHT")
 	  border.b <- Border(position="TOP")
@@ -76,20 +84,19 @@ function(annot_all,Path,DF,j.mem = "10g",plots=F){
 	  for (x in sec.pos){
 	      CB.setBorder(cb, border.r, 1:(nrow(annot_cur)), max(x))
 	  }
-	  # add column names to first row
-    annot_cur <- rbind(colnames(annot_cur),annot_cur)
 	  # add cell colours
 	  for (y in 1:length(sec.colour)){
-	    
-	    fill <- Fill(foregroundColor = sec.colour[y], backgroundColor=sec.colour[y])
-	    fills.1 <- sec.pos[y]
-	    for (x in 1:length(fills.1)){
-	      CB.setFill(cb, fill, 1, fills.1[x])
-	    }	  
+	    if(names(sec.colour)[y] %in% colnames(annot_cur)){
+	      fill <- Fill(foregroundColor = sec.colour[y], backgroundColor=sec.colour[y])
+	      fills.1 <- sec.pos[y]
+	      for (x in 1:length(fills.1)){
+	        CB.setFill(cb, fill, 1, fills.1[x])
+	      }
+	    }
 	  }
 	  # set font size
 	  for (x in 1:ncol(annot_cur)){
-	    CB.setFont(cb, font,1:(nrow(annot_cur)),x)
+	    CB.setFont(cb, font,1:nrow(annot_cur),x)
 	  }
 	}
   return(wb)
