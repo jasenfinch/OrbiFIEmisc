@@ -1,6 +1,6 @@
 xlsxAnnot <-
 function(annot_all,Path,DF,j.mem = "10g",plots=F){
-  options(java.parameters= paste("\"-Xmx",j.mem,"\"",sep=""))
+  options(java.parameters= paste("\"-Xmx",j.mem," -XX:+UseConcMarkSweepGC\"",sep=""))
   # create workbook
   wb <- createWorkbook()
   alignment <- Alignment(horizontal="ALIGN_CENTER")
@@ -20,9 +20,9 @@ function(annot_all,Path,DF,j.mem = "10g",plots=F){
 	  # add columns and rows for plots if needed 
 	  if (plots==T){
 	    # add columns
-		  annot_cur <- cbind(annot_cur[,1:3],matrix("",nrow=nrow(annot_cur),ncol=14),annot_cur[,4:ncol(annot_cur)])
-		  colnames(annot_cur)[4:10] <- "Boxplots"
-		  colnames(annot_cur)[11:17] <- "Bin Plots"
+		  annot_cur <- cbind(annot_cur[,1:3],matrix("",nrow=nrow(annot_cur),ncol=8),annot_cur[,4:ncol(annot_cur)])
+		  colnames(annot_cur)[4:7] <- "Box Plots"
+		  colnames(annot_cur)[8:11] <- "Bin Plots"
 		  # calculate where rows need to be added and how many
 		  pos.bin.1 <- c(pos.bin,nrow(annot_cur))
 		  if (pos.bin.1[length(pos.bin.1)-1]==pos.bin.1[length(pos.bin.1)]){
@@ -35,7 +35,7 @@ function(annot_all,Path,DF,j.mem = "10g",plots=F){
 		  }
 		  # add rows
 		  for (x in 1:length(pos.bin)){
-		    if (pos.diff[i] < 15){
+		    if (pos.diff[x] < 15){
 		      extra.row <- matrix("",nrow=15-pos.diff[x],ncol=ncol(annot_cur))
 		      colnames(extra.row) <- colnames(annot_cur)
 		      annot_cur <- rbind(annot_cur[1:(pos.bin.1[x+1]-1),],extra.row,annot_cur[(pos.bin.1[x+1]):nrow(annot_cur),])
@@ -53,10 +53,10 @@ function(annot_all,Path,DF,j.mem = "10g",plots=F){
 		  pos.bin <- unlist(pos.bin)
 		  for (x in 1:length(bins)){
 		    if (file.exists(paste(Path,DF,paste(DF,"Boxplots",sep="_"),paste(paste(DF,bins[x],sep="_"),".jpeg",sep=""),sep="/"))){
-		      addPicture(paste(Path,DF,paste(DF,"Boxplots",sep="_"),paste(paste(DF,bins[x],sep="_"),".jpeg",sep=""),sep="/"),sheet,startRow=pos.bin[x]+1,startColumn=4,scale=0.4)
+		      addPicture(paste(Path,DF,paste(DF,"Boxplots",sep="_"),paste(paste(DF,bins[x],sep="_"),".jpeg",sep=""),sep="/"),sheet,startRow=pos.bin[x]+2,startColumn=4,scale=0.5)
 		    }
 		    if (file.exists(paste(Path,DF,paste(DF,"Bin_Plots",sep="_"),paste(paste(DF,"Peaks",bins[x],sep="_"),".jpeg",sep=""),sep="/"))){
-		      addPicture(paste(Path,DF,paste(DF,"Bin_Plots",sep="_"),paste(paste(DF,"Peaks",bins[x],sep="_"),".jpeg",sep=""),sep="/"),sheet,startRow=pos.bin[x]+1,startColumn=11,scale=0.2)
+		      addPicture(paste(Path,DF,paste(DF,"Bin_Plots",sep="_"),paste(paste(DF,"Peaks",bins[x],sep="_"),".jpeg",sep=""),sep="/"),sheet,startRow=pos.bin[x]+2,startColumn=8,scale=0.5)
 		    }
 		  }
 	  }
@@ -66,10 +66,12 @@ function(annot_all,Path,DF,j.mem = "10g",plots=F){
 	    pos.bin[x] <- which(annot_cur[,1]==bins[x])
 	  }
 	  pos.bin <- unlist(pos.bin)
+	  # set NAs to blank
+	  annot_cur <- apply(annot_cur,2,function(x){x[is.na(x)] <- ""; return(x)}) 
 	  # set cell alignment, style and add data to workbook
 	  cb <- CellBlock(sheet, 1, 1, nrow(annot_cur), ncol(annot_cur))
 	  CB.setMatrixData(cb, annot_cur, 1, 1,cellStyle=cell.style)
-	  sec.colour <- c(Accurate.m.z="lightblue",Boxplots="lightsalmon",`Bin Plots`="Red",Correlation.Analysis="Blue",Molecular.Formulas="yellow",Putative.Ionisation.Products="bisque1")
+	  sec.colour <- c(Accurate.m.z="lightblue",Boxplots="lightsalmon",`Bin Plots`="lightgreen",Correlation.Analysis="Red",Molecular.Formulas="yellow",Putative.Ionisation.Products="bisque1")
 	  # calculate rows and columns of borders
 	  cols <- colnames(annot_cur)
 	  sec.pos <- lapply(names(sec.colour),function(x,y){return(grep(x,y))},y=cols)
@@ -86,11 +88,11 @@ function(annot_all,Path,DF,j.mem = "10g",plots=F){
 	  }
 	  # add cell colours
 	  for (y in 1:length(sec.colour)){
-	    if(names(sec.colour)[y] %in% colnames(annot_cur)){
+	    if(TRUE %in% grepl(names(sec.colour)[y],colnames(annot_cur))){
 	      fill <- Fill(foregroundColor = sec.colour[y], backgroundColor=sec.colour[y])
-	      fills.1 <- sec.pos[y]
+	      fills.1 <- sec.pos[[y]]
 	      for (x in 1:length(fills.1)){
-	        CB.setFill(cb, fill, 1, fills.1[x])
+	        CB.setFill(cb, fill, 1, fills.1[[x]])
 	      }
 	    }
 	  }
@@ -99,5 +101,5 @@ function(annot_all,Path,DF,j.mem = "10g",plots=F){
 	    CB.setFont(cb, font,1:nrow(annot_cur),x)
 	  }
 	}
-  return(wb)
+  saveWorkbook(wb,paste(Path,DF,paste(DF,"Annotations",sep="_"),paste(DF,"annotation_sheet.xlsx",sep="_"),sep="/"))
 }
