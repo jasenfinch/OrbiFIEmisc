@@ -1,6 +1,11 @@
 xlsxAnnot <-
-function(annot_all,Path,DF,j.mem = "10g",plots=F){
+function(annot_all,Path,DF,j.mem = "10g",plots=F,HPC_mode=F){
   options(java.parameters= paste("\"-Xmx",j.mem," -XX:+UseConcMarkSweepGC\"",sep=""))
+  if(HPC_mode==T){
+    pic.ext <- ".bmp"
+  } else {
+    pic.ext <- ".jpeg"
+  }
   # create workbook
   wb <- createWorkbook()
   alignment <- Alignment(horizontal="ALIGN_CENTER")
@@ -52,11 +57,11 @@ function(annot_all,Path,DF,j.mem = "10g",plots=F){
 		  }
 		  pos.bin <- unlist(pos.bin)
 		  for (x in 1:length(bins)){
-		    if (file.exists(paste(Path,DF,paste(DF,"Boxplots",sep="_"),paste(paste(DF,bins[x],sep="_"),".jpeg",sep=""),sep="/"))){
-		      addPicture(paste(Path,DF,paste(DF,"Boxplots",sep="_"),paste(paste(DF,bins[x],sep="_"),".jpeg",sep=""),sep="/"),sheet,startRow=pos.bin[x]+2,startColumn=4,scale=0.5)
+		    if (file.exists(paste(Path,DF,paste(DF,"Boxplots",sep="_"),paste(paste(DF,bins[x],sep="_"),pic.ext,sep=""),sep="/"))){
+		      addPicture(paste(Path,DF,paste(DF,"Boxplots",sep="_"),paste(paste(DF,bins[x],sep="_"),pic.ext,sep=""),sep="/"),sheet,startRow=pos.bin[x]+2,startColumn=4,scale=0.5)
 		    }
-		    if (file.exists(paste(Path,DF,paste(DF,"Bin_Plots",sep="_"),paste(paste(DF,"Peaks",bins[x],sep="_"),".jpeg",sep=""),sep="/"))){
-		      addPicture(paste(Path,DF,paste(DF,"Bin_Plots",sep="_"),paste(paste(DF,"Peaks",bins[x],sep="_"),".jpeg",sep=""),sep="/"),sheet,startRow=pos.bin[x]+2,startColumn=8,scale=0.5)
+		    if (file.exists(paste(Path,DF,paste(DF,"Bin_Plots",sep="_"),paste(paste(DF,"Peaks",bins[x],sep="_"),pic.ext,sep=""),sep="/"))){
+		      addPicture(paste(Path,DF,paste(DF,"Bin_Plots",sep="_"),paste(paste(DF,"Peaks",bins[x],sep="_"),pic.ext,sep=""),sep="/"),sheet,startRow=pos.bin[x]+2,startColumn=8,scale=0.5)
 		    }
 		  }
 	  }
@@ -71,7 +76,7 @@ function(annot_all,Path,DF,j.mem = "10g",plots=F){
 	  # set cell alignment, style and add data to workbook
 	  cb <- CellBlock(sheet, 1, 1, nrow(annot_cur), ncol(annot_cur))
 	  CB.setMatrixData(cb, annot_cur, 1, 1,cellStyle=cell.style)
-	  sec.colour <- c(Accurate.m.z="lightblue",Boxplots="lightsalmon",`Bin Plots`="lightgreen",Correlation.Analysis="Red",Molecular.Formulas="yellow",Putative.Ionisation.Products="bisque1")
+	  sec.colour <- c(Accurate.m.z="lightblue",`Box Plots`="lightsalmon",`Bin Plots`="lightgreen",Correlation.Analysis="Red",Molecular.Formulas="yellow",Putative.Ionisation.Products="bisque1")
 	  # calculate rows and columns of borders
 	  cols <- colnames(annot_cur)
 	  sec.pos <- lapply(names(sec.colour),function(x,y){return(grep(x,y))},y=cols)
