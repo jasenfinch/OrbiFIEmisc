@@ -6,7 +6,6 @@ function (lists,dn,Path,DF){
 	for (y in 1:length(lists)){
 		uni <- NULL
 		list.1 <- lists[[y]]
-		list.1 <- list.1[[1]]
 		for (i in 1:ncol(list.1)){
 			lis <- as.character(list.1[,1])
 			lis <- na.omit(lis)
