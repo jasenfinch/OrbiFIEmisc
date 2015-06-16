@@ -3,9 +3,14 @@
 accMass <-
 function(master_mat,cls,masses){		 
 		mat.acc <- NULL
-		masses.p <- as.numeric(gsub("p","",masses[[1]]))
-		masses.n <- as.numeric(gsub("n","",masses[[2]]))
-		mass <- list(masses.p,masses.n)
+		mass <- list()
+		for (i in 1:length(masses)){
+		  if(names(masses)[i]=="Positive_Mode"){
+		    mass[[i]] <- as.numeric(gsub("p","",masses[["Positive_Mode"]]))
+		  } else {
+		    mass[[i]] <- as.numeric(gsub("n","",masses[["Negative_Mode"]]))
+		  }
+		}
 		for (i in 1:length(master_mat)){
 			acc.mat <- matrix(0,nrow=length(mass[[i]]),ncol=2*length(unique(cls)))
 			mat <- master_mat[[i]]
