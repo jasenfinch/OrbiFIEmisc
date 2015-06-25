@@ -1,5 +1,5 @@
 boxLinePlot <-
-function(x,cls,Path,DF,dn,masses,type,h.group=NULL,v.group=NULL){ # Plotting function for box_line
+function(x,cls,Path,DF,dn,masses,type,h.group=NULL,v.group=NULL,HPC_mode=F){ # Plotting function for box_line
 	dat.mat <- data.frame(x)
 	if (type=="bl"){
 		d <- data.frame (x,cls,h.group,v.group)
@@ -23,7 +23,11 @@ function(x,cls,Path,DF,dn,masses,type,h.group=NULL,v.group=NULL){ # Plotting fun
   	 	 geom_errorbar(aes(ymin=value-ci, ymax=value+ci), width=.1,position=pd) +
   	 	 geom_line(size=0.1,position=pd) +
   	 	 geom_point(position=pd) + xlab("Hours post inoculation") + ylab("log10 Intensity")
-  		 jpeg(paste(Path,DF,paste(DF,"Boxplots",sep="_"),paste(DF,"_",vari,".jpeg",sep=""),sep="/"))
+  		 if (HPC_mode==T){
+		  		bitmap(paste(Path,DF,paste(DF,"Boxplots",sep="_"),paste(paste(DF,vari,sep="_"),".bmp",sep=""),sep="/"))
+		   } else {
+  		    jpeg(paste(Path,DF,paste(DF,"Boxplots",sep="_"),paste(paste(DF,vari,sep="_"),".jpeg",sep=""),sep="/"))
+		   }
   		 grid.arrange(ggbox,ggline)
   	 	 dev.off()
 	}
@@ -34,6 +38,11 @@ function(x,cls,Path,DF,dn,masses,type,h.group=NULL,v.group=NULL){ # Plotting fun
 		d.1 <- melt(d)
 		d.1$variable <- factor(d.1$variable)
 		doPlot = function(vari) {
+		  if (HPC_mode==T){
+		  		bitmap(paste(Path,DF,paste(DF,"Boxplots",sep="_"),paste(paste(DF,vari,sep="_"),".bmp",sep=""),sep="/"))
+		  } else {
+  		    jpeg(paste(Path,DF,paste(DF,"Boxplots",sep="_"),paste(paste(DF,vari,sep="_"),".jpeg",sep=""),sep="/"))
+		  }
  	 		d.1.sub1 = subset(d.1, variable == vari)
  	 		ggbox <- ggplot(d.1.sub1, aes(x = cls, y = value,fill=cls)) + 
  	   	geom_boxplot() +
@@ -41,7 +50,7 @@ function(x,cls,Path,DF,dn,masses,type,h.group=NULL,v.group=NULL){ # Plotting fun
  	 		if(length(unique(cls)) < 11){
  	  		ggbox <- ggbox + scale_fill_brewer(palette="RdYlBu")
  	  	}
-  		ggsave(paste(Path,DF,paste(DF,"Boxplots",sep="_"),paste(paste(DF,vari,sep="_"),".jpeg",sep=""),sep="/"))
+  		print(ggbox)
   		dev.off()
 	}
 	lapply(unique(d.1$variable), doPlot)
