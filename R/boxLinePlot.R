@@ -5,7 +5,7 @@ function(x,cls,Path,DF,dn,masses,type,h.group=NULL,v.group=NULL,HPC_mode=F){ # P
 		d <- data.frame (x,cls,h.group,v.group)
 		d.1 <- melt(d)
 		d.1$variable <- factor(d.1$variable)
-		d.1.summ <- summarySE(d.1, measurevar="value", groupvars=c("cls","h.group","v.group","variable"))
+		d.1.summ <- summaryDat(d.1, measurevar="value", groupvars=c("cls","h.group","v.group","variable"))
 		names(d.1.summ)[3] <- "Treatment"
 		pd <- position_dodge(.1)
 

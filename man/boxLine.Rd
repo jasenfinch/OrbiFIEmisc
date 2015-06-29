@@ -5,7 +5,7 @@
 \title{boxplot and line plotting function, masses=NULL plots all}
 \usage{
 boxLine(dat.all, cls, Path, DF, dn, masses, type = "bl", h.group = NULL,
-  v.group = NULL)
+  v.group = NULL, HPC_mode = F)
 }
 \description{
 boxplot and line plotting function, masses=NULL plots all
