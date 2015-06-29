@@ -1,15 +1,17 @@
 
 
 logRatio <-
-function(x,info) {
-  me <- aggregate(x,by=list(info$genos),mean)
+function(data,cls.treat,cls.time) {
+  me <- aggregate(data,by=list(paste(cls.time,cls.treat,sep="-")),mean)
   rownames(me) <- me$Group.1
   me$Group.1 <- NULL
-  tme <-t(me)
-  inf <- tme[,seq(1,8,2)]
-  mock <- tme[,seq(2,8,2)]
-  lrmat <- log2(inf/mock)
-  rownames(lrmat) <- rownames(tme)
-  colnames(lrmat) <- sort(unique(info$tp))
+  uni.treat <- unique(cls.treat)
+  uni.time <- unique(cls.time)
+  treat.control <- list()
+  for (i in 1:length(uni.treat)){
+    treat.control[[i]] <- me[grep(uni.treat[i],rownames(me)),]
+  }
+  lrmat <- log2(treat.control[[1]]/treat.control[[2]])
+  rownames(lrmat) <- uni.time
   return(lrmat)
 }
