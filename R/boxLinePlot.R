@@ -3,7 +3,7 @@ function(x,cls,Path,DF,dn,masses,type,h.group=NULL,v.group=NULL,HPC_mode=F){ # P
 	dat.mat <- data.frame(x)
 	if (type=="bl"){
 		d <- data.frame (x,cls,h.group,v.group)
-		d.1 <- melt(d)
+		suppressMessages(d.1 <- melt(d))
 		d.1$variable <- factor(d.1$variable)
 		d.1.summ <- summaryDat(d.1, measurevar="value", groupvars=c("cls","h.group","v.group","variable"))
 		names(d.1.summ)[3] <- "Treatment"
@@ -11,7 +11,7 @@ function(x,cls,Path,DF,dn,masses,type,h.group=NULL,v.group=NULL,HPC_mode=F){ # P
 
 		# Function for plotting 
 		doPlot = function(vari) {
- 	  	d.1.sub1 = subset(d.1, variable == vari)
+ 	    d.1.sub1 = subset(d.1, variable == vari)
  	 		ggbox <- ggplot(d.1.sub1, aes(x = cls, y = value,fill=cls)) + 
  	 			geom_boxplot() +
   			guides(fill=FALSE) + ggtitle(vari) + xlab("Class") + ylab("log10 Intensity")
@@ -31,11 +31,11 @@ function(x,cls,Path,DF,dn,masses,type,h.group=NULL,v.group=NULL,HPC_mode=F){ # P
   		 grid.arrange(ggbox,ggline)
   	 	 dev.off()
 	}
-	lapply(unique(d.1$variable), doPlot)
+	suppressMessages(lapply(unique(d.1$variable), doPlot))
 	} 
 	if (type=="b"){
 		d <- data.frame (x,cls)
-		d.1 <- melt(d)
+		suppressMessages(d.1 <- melt(d))
 		d.1$variable <- factor(d.1$variable)
 		doPlot = function(vari) {
 		  if (HPC_mode==T){
