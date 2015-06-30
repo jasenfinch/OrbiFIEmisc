@@ -6,13 +6,13 @@ function(annot_all,Path,DF,j.mem = "10g",plots=F,HPC_mode=F){
   } else {
     pic.ext <- ".jpeg"
   }
-  # create workbook
-  wb <- createWorkbook()
-  alignment <- Alignment(horizontal="ALIGN_CENTER")
-  cell.style <- CellStyle(wb, alignment=alignment)
-  font <-  Font(wb, heightInPoints=8)
-  # create each sheet for for each mode
 	for (i in 1:length(annot_all)){
+	  # create workbook
+	  wb <- createWorkbook()
+	  alignment <- Alignment(horizontal="ALIGN_CENTER")
+	  cell.style <- CellStyle(wb, alignment=alignment)
+	  font <-  Font(wb, heightInPoints=8)
+	  # create each sheet for for each mode
 	  sheet <- createSheet(wb, sheetName = names(annot_all)[i])
 	  annot_cur <- annot_all[[i]]
 	  annot_cur <- apply(annot_cur,2,as.character)
@@ -105,6 +105,6 @@ function(annot_all,Path,DF,j.mem = "10g",plots=F,HPC_mode=F){
 	  for (x in 1:ncol(annot_cur)){
 	    CB.setFont(cb, font,1:nrow(annot_cur),x)
 	  }
+	  saveWorkbook(wb,paste(Path,DF,paste(DF,"Annotations",sep="_"),paste(DF,names(annot_all)[i],"annotation_sheet.xlsx",sep="_"),sep="/"))
 	}
-  saveWorkbook(wb,paste(Path,DF,paste(DF,"Annotations",sep="_"),paste(DF,"annotation_sheet.xlsx",sep="_"),sep="/"))
-}
+ }
