@@ -2,11 +2,11 @@
 % Please edit documentation in R/scaleSS.R
 \name{scaleSS}
 \alias{scaleSS}
-\title{to scale varibles to their sum of squares}
+\title{to scale a vector to its sum of squares}
 \usage{
-scaleSS(data)
+scaleSS(x)
 }
 \description{
-to scale varibles to their sum of squares
+to scale a vector to its sum of squares
 }
 
