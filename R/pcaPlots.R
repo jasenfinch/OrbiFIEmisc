@@ -1,8 +1,9 @@
 #' pca plots using ggplot2
 
 pcaPlots <-
-function(pca.scores,pca.vars.1,PC.1,PC.2,dn,Path,DF,cls.1=NULL,HPC_mode=F){
+function(pca.scores,pca.vars.1,PC.1,PC.2,Path,DF,cls.1=NULL,HPC_mode=F){
 	.e = environment()
+	dn <- unique(pca.scores$type)
 	for (i in 1:length(dn)){
 		sub.pca <- subset(pca.scores, pca.scores$type == dn[i] )
 		sub.pca <- sub.pca[,c(PC.1,PC.2,"y","type")]
