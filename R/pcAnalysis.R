@@ -10,6 +10,7 @@ pcAnalysis <- function(dat.all,cls){
   })
     pca.scores <- do.call(rbind, lapply(pca.1, function(x) x$scores))
     pca.vars   <- do.call(rbind, lapply(pca.1, function(x) x$vars))
+    rownames(pca.vars) <- dn
     pca.loadings <- do.call(rbind, lapply(pca.1, function(x) x$loadings))
     pca.res <- list(pca.scores=pca.scores, pca.vars=pca.vars, pca.loadings=data.frame(pca.loadings,stringsAsFactors = F))
 	return(pca.res)

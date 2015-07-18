@@ -1,7 +1,8 @@
-
+#' LDA plots using ggplot2
 
 ldaPlots <-
-function(lda.dfs,lda.eig,DF.1,DF.2,dn,Path,DF,cls.1=NULL,HPC_mode=F){	# LDA plots using ggplot2
+function(lda.dfs,lda.eig,DF.1,DF.2,Path,DF,cls.1=NULL,HPC_mode=F){
+  dn <- unique(lda.dfs$type)
 	.e = environment()
 	for (i in 1:length(dn)){
 		sub.lda <- subset(lda.dfs, lda.dfs$type == dn[i] )

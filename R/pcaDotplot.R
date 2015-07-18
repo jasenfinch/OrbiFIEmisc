@@ -1,11 +1,9 @@
 #' PCA variance dotplot using ggplot2
 
 pcaDotplot <-
-function(pca.vars,dn,Path,DF,HPC_mode=F){
+function(pca.vars,Path,DF,HPC_mode=F){
 	.e = environment()
-	rownames(pca.vars) <- dn
-	pca.vars <- t(pca.vars)
-	pca.vars <- melt(pca.vars) 
+	pca.vars <- melt(t(pca.vars))
 	if (HPC_mode==T){
 		bitmap(paste(Path,DF,paste(DF,"PCA_&_LDA",sep="_"),paste(DF,"PCA_Variance.bmp" ,sep="_"),sep="/"))
 	} else {

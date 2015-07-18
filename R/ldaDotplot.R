@@ -1,7 +1,8 @@
 #' Eigenvalue dotplot using ggplot2
 
 ldaDotplot <-
-function(lda.eig,dn,Path,DF,HPC_mode=F){
+function(lda.eig,Path,DF,HPC_mode=F){
+  dn <- rownames(lda.eig)
 	.e = environment()
 	lda.eig <- t(lda.eig)
 	lda.eig <- melt(lda.eig)

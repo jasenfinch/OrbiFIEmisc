@@ -1,7 +1,8 @@
 #' Two class LDA plot using ggplot2
 
 ldaStrip <-
-function(lda.dfs,lda.eig,dn,Path,DF,HPC_mode=F){	# 
+function(lda.dfs,lda.eig,Path,DF,HPC_mode=F){
+  dn <- unique(lda.dfs$type)
 	.e = environment()
 	for (i in 1:length(dn)){
 	sub.lda <- subset(lda.dfs, lda.dfs$type == dn[i] )
