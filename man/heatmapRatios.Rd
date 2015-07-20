@@ -4,7 +4,7 @@
 \alias{heatmapRatios}
 \title{Plot heatmap of log2 ratios treatments}
 \usage{
-heatmapRatios(dat.all, masses, cls.treat, cls.time, rel = T)
+heatmapRatios(data, masses, cls.treat, cls.time, rel = T)
 }
 \description{
 Plot heatmap of log2 ratios treatments
