@@ -4,7 +4,7 @@
 \alias{pcaPlots}
 \title{pca plots using ggplot2}
 \usage{
-pcaPlots(pca.scores, pca.vars.1, PC.1, PC.2, dn, Path, DF, cls.1 = NULL,
+pcaPlots(pca.scores, pca.vars.1, PC.1, PC.2, Path, DF, cls.1 = NULL,
   HPC_mode = F)
 }
 \description{
