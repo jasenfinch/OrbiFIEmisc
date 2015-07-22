@@ -4,7 +4,7 @@
 \alias{pcaDotplot}
 \title{PCA variance dotplot using ggplot2}
 \usage{
-pcaDotplot(pca.vars, dn, Path, DF, HPC_mode = F)
+pcaDotplot(pca.vars, Path, DF, HPC_mode = F)
 }
 \description{
 PCA variance dotplot using ggplot2
