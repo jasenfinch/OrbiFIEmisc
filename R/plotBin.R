@@ -24,8 +24,10 @@ function(master_mat,masses,Path,DF,HPC_mode=F){
 		  } else {
 		  		jpeg(paste(Path,DF,paste(DF,"Bin_Plots",sep="_"),paste(DF,paste("Peaks_",mass.1[x],".jpeg",sep=""),sep="_"),sep="/"))
 		  }
-      p <- ggplot(mat.1,aes(x=Var1,y=value)) +
-        geom_bar(stat="identity") +
+      p <- ggplot(mat.1,aes(x=Var1,y=0,xend=Var1,yend=value)) +
+        geom_segment() +
+        theme_bw() +
+        theme(axis.text.x  = element_text(angle=90, vjust=0.5)) +
         facet_wrap(~Var2) +
         ggtitle(mass.1[x]) +
         xlab("m/z") + 

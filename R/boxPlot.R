@@ -18,6 +18,8 @@ function(x,info,Path,DF,masses,dn,HPC_mode=F){
 		  }
  	    ggbox <- ggplot(d.1.sub1, aes(x = info, y = value,fill=info)) + 
  	    geom_boxplot() +
+ 	    theme_bw() +
+ 	    theme(axis.text.x  = element_text(angle=90, vjust=0.5)) +
   	  guides(fill=FALSE) +
   	  ggtitle(vari) + xlab("Class") + ylab("log10 Intensity")
 	    if (length(unique(info)) < 12){
