@@ -14,7 +14,7 @@ function(x,dn,Path,DF,HPC_mode=F){
 	if (HPC_mode==T){
 	  bitmap(paste(Path,DF,paste(DF,"Classification_&_Feature_Selection",sep="_"),paste(DF,dn,"RFimportance_plot.bmp",sep="_"),sep="/"))
 	} else {
-	  jpeg(paste(Path,DF,paste(DF,"Classification_&_Feature_Selection",sep="_"),paste(DF,dn,"RFimportance_plot.jpeg",sep="_"),sep="/"))
+	  png(paste(Path,DF,paste(DF,"Classification_&_Feature_Selection",sep="_"),paste(DF,dn,"RFimportance_plot.png",sep="_"),sep="/"))
 	}
 	ggline <- ggplot(stats, aes(x=Rank, y=value, colour=Pairwise,group=Pairwise)) + 
   	geom_point(size=1.5) + xlab("Rank") + ylab("Importance Score") +

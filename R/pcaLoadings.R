@@ -9,15 +9,16 @@ pcaLoadings <- function(pca.loadings,Path,DF,pcs=1:3,HPC_mode=F){
       mz  <- as.numeric(gsub("n","",rownames(loadings)))
     }
     for (k in pcs){
-      data <- data.frame(cbind(mz,as.numeric(loadings[,k])))
+      data <- data.frame(mz,loading=as.numeric(loadings[,k]),type=loadings$type)
       if (HPC_mode==T){
         bitmap(paste(Path,DF,paste(DF,"PCA_&_LDA",sep="_"),paste(DF,dn[i],paste("PC",k,sep=""),"Loadings.bmp" ,sep="_"),sep="/"))
       } else {
-        jpeg(paste(Path,DF,paste(DF,"PCA_&_LDA",sep="_"),paste(DF,dn[i],paste("PC",k,sep=""),"Loadings.jpeg" ,sep="_"),sep="/"))
+        png(paste(Path,DF,paste(DF,"PCA_&_LDA",sep="_"),paste(DF,dn[i],paste("PC",k,sep=""),"Loadings.png" ,sep="_"),sep="/"))
       }
-      print(ggplot(data,aes(x=mz,y=V2)) + 
+      print(ggplot(data,aes(x=mz,y=loading)) + 
         geom_point(colour="#3399FF",stat="identity") +
         ylab(paste("PC",k,sep="")) +
+        facet_wrap(~type,ncol=2) +
         ggtitle(paste(DF," PC",k," Loadings" ,sep="")) +
         theme_bw()) 
       dev.off()

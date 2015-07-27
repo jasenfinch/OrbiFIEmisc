@@ -14,7 +14,7 @@ function(x,info,Path,DF,masses,dn,HPC_mode=F){
  	    if (HPC_mode==T){
 		  		bitmap(paste(Path,DF,paste(DF,"Boxplots",sep="_"),paste(paste(DF,vari,sep="_"),".bmp",sep=""),sep="/"))
 		  } else {
-		  		jpeg(paste(Path,DF,paste(DF,"Boxplots",sep="_"),paste(paste(DF,vari,sep="_"),".jpeg",sep=""),sep="/"))
+		  		png(paste(Path,DF,paste(DF,"Boxplots",sep="_"),paste(paste(DF,vari,sep="_"),".png",sep=""),sep="/"))
 		  }
  	    ggbox <- ggplot(d.1.sub1, aes(x = info, y = value,fill=info)) + 
  	    geom_boxplot() +
