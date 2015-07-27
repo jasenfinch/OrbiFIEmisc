@@ -13,6 +13,7 @@ function(pca.vars,Path,DF,HPC_mode=F){
 						 	geom_point(size=3,aes(shape=Var1)) +
 						  coord_flip() +
 							ylab("Percentage") +
+	            theme_bw() +
 							theme(plot.title = element_text(lineheight=.8, face="bold"),legend.title=element_blank() )  +
 							scale_shape_manual(values=c(1:length(unique(pca.vars$Var1)))) +
 							xlab("") +

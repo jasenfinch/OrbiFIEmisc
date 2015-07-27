@@ -16,9 +16,10 @@ pcaLoadings <- function(pca.loadings,Path,DF,pcs=1:3,HPC_mode=F){
         jpeg(paste(Path,DF,paste(DF,"PCA_&_LDA",sep="_"),paste(DF,dn[i],paste("PC",k,sep=""),"Loadings.jpeg" ,sep="_"),sep="/"))
       }
       print(ggplot(data,aes(x=mz,y=V2)) + 
-        geom_point(colour="Blue",stat="identity") +
+        geom_point(colour="#3399FF",stat="identity") +
         ylab(paste("PC",k,sep="")) +
-        ggtitle(paste(DF," PC",k," Loadings" ,sep="")) )
+        ggtitle(paste(DF," PC",k," Loadings" ,sep="")) +
+        theme_bw()) 
       dev.off()
     }
   }

@@ -20,6 +20,7 @@ function(pca.scores,pca.vars.1,PC.1,PC.2,Path,DF,cls.1=NULL,HPC_mode=F){
 				facet_wrap( ~ type, ncol=2)+ 
 				ggtitle(paste(DF," PCA" ,sep="")) +
 				scale_fill_hue(l=40) +
+			  theme_bw() +
 				theme(plot.title = element_text(lineheight=.8, face="bold"),legend.title=element_blank() )  +
 				xlab(paste(PC.1," (Var ",round(pca.vars.1[i,PC.1], digits=2),"%)",sep="")) + 
 				ylab(paste(PC.2," (Var ",round(pca.vars.1[i,PC.2], digits=2),"%)",sep=""))
@@ -31,6 +32,7 @@ function(pca.scores,pca.vars.1,PC.1,PC.2,Path,DF,cls.1=NULL,HPC_mode=F){
 				facet_wrap( ~ type, ncol=2)+ 
 				ggtitle(paste(DF," PCA" ,sep="")) +
 				scale_fill_hue(l=40) +
+			  theme_bw() +
 				theme(plot.title = element_text(lineheight=.8, face="bold"),legend.title=element_blank() )  +
 				xlab(paste(PC.1," (Var ",round(pca.vars.1[i,PC.1], digits=2),"%)",sep="")) + 
 				ylab(paste(PC.2," (Var ",round(pca.vars.1[i,PC.2], digits=2),"%)",sep=""))

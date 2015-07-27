@@ -19,6 +19,7 @@ function(lda.dfs,lda.eig,DF.1,DF.2,Path,DF,cls.1=NULL,HPC_mode=F){
 				scale_shape_manual(values=c(1:length(unique(sub.lda$y)))) +
 				ggtitle(paste(DF," LDA" ,sep="")) +
 				scale_fill_hue(l=40) +
+			  theme_bw() +
 				theme(plot.title = element_text(lineheight=.8, face="bold"),legend.title=element_blank() )  +
 				xlab(paste(DF.1," (Tw ",round(lda.eig[i,DF.1], digits=2),")",sep="")) + 
 				ylab(paste(DF.2," (Tw ",round(lda.eig[i,DF.2], digits=2),")",sep=""))
@@ -30,6 +31,7 @@ function(lda.dfs,lda.eig,DF.1,DF.2,Path,DF,cls.1=NULL,HPC_mode=F){
 				scale_shape_manual(values=c(1:length(unique(sub.lda$y)))) +
 				ggtitle(paste(DF," LDA" ,sep="")) +
 				scale_fill_hue(l=40) +
+				theme_bw() +
 				theme(plot.title = element_text(lineheight=.8, face="bold"),legend.title=element_blank() )  +
 				xlab(paste(DF.1," (Tw ",round(lda.eig[i,DF.1], digits=2),")",sep="")) + 
 				ylab(paste(DF.2," (Tw ",round(lda.eig[i,DF.2], digits=2),")",sep=""))

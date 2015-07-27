@@ -18,6 +18,7 @@ function(lda.dfs,lda.eig,Path,DF,HPC_mode=F){
   		scale_shape_manual(values=c(1:length(unique(sub.lda$y)))) +
     	ggtitle(paste(DF," LDA" ,sep="")) +
 	  	scale_fill_hue(l=40) +
+	    theme_bw() +
     	theme(plot.title = element_text(lineheight=.8, face="bold"),legend.title=element_blank() )  +
     	xlab(paste("")) + 
     	ylab(paste("DF1"," (Tw ",round(lda.eig[i], digits=2),")",sep=""))

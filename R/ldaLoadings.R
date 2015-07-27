@@ -16,9 +16,10 @@ ldaLoadings <- function(lda.loadings,Path,DF,dfs=1:3,HPC_mode=F){
         jpeg(paste(Path,DF,paste(DF,"PCA_&_LDA",sep="_"),paste(DF,dn[i],paste("DF",k,sep=""),"Loadings.jpeg" ,sep="_"),sep="/"))
       }
       print(ggplot(data,aes(x=mz,y=V2)) + 
-              geom_point(colour="Darkgreen",stat="identity") +
+              geom_point(colour="#FF3333",stat="identity") +
               ylab(paste("DF",k,sep="")) +
-              ggtitle(paste(DF," DF",k," Loadings" ,sep="")) )
+              ggtitle(paste(DF," DF",k," Loadings" ,sep="")) +
+              theme_bw())
       dev.off()
     }
   }
