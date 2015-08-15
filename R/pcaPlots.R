@@ -36,6 +36,6 @@ function(pca.scores,pca.vars.1,PC.1,PC.2,Path,DF,cls.1=NULL,HPC_mode=F){
 				ylab(paste(PC.2," (Var ",round(pca.vars.1[i,PC.2], digits=2),"%)",sep=""))
 		}
 		print (plot.1)
-		dev.off()
+		graphics.off()
 	}
 }

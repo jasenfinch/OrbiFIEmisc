@@ -18,5 +18,5 @@ function(pca.vars,Path,DF,HPC_mode=F){
 							xlab("") +
 							ggtitle(paste(DF,": PCA proportion of variance"))						
 	print(pca.p.1)
-	dev.off()
+	graphics.off()
 }
