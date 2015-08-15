@@ -1,17 +1,19 @@
 
 
 preProcess <-
-function(x,cls,bat,out_id,out_idx,TIC_cls=NULL){
+function(x,cls=NULL,bat=NULL,out_id=NULL,out_idx=NULL,TIC_cls=NULL,procmeth=c("log10","TICnorm"),pre_SD=T,mean_shift=T){
 	dat <- x;
 	if (length(out_id)>0){
 		dat <- dat[-out_id,,drop=F]
 			}
 	if (length(out_idx)>0){
   	dat <- dat[-out_idx,,drop=F]
-			}
-	dat <- preprocSD(dat, cls);      ## remove zero or constant signals
-	if (length(unique(bat))>1){
-	dat <- meanShift(dat, bat)
 	}
-	dat <- preproc(dat, method=c("log10","TICnorm"),y=TIC_cls);
+	if (pre_SD==T){
+	  dat <- preprocSD(dat, cls);      ## remove zero or constant signals
+	}
+	if (length(unique(bat))>1 & mean_shift==T){
+	  dat <- meanShift(dat, bat)
+	}
+	dat <- preproc(dat, method=proc_meth,y=TIC_cls);
 }
