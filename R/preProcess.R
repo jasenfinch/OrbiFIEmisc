@@ -1,7 +1,7 @@
 
 
 preProcess <-
-function(x,cls=NULL,bat=NULL,out_id=NULL,out_idx=NULL,TIC_cls=NULL,procmeth=c("log10","TICnorm"),pre_SD=T,mean_shift=T){
+function(x,cls=NULL,bat=NULL,out_id=NULL,out_idx=NULL,pre_SD=T,mean_shift=T){
 	dat <- x;
 	if (length(out_id)>0){
 		dat <- dat[-out_id,,drop=F]
