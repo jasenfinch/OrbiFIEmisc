@@ -15,5 +15,6 @@ function(x,cls=NULL,bat=NULL,out_id=NULL,out_idx=NULL,TIC_cls=NULL,procmeth=c("l
 	if (length(unique(bat))>1 & mean_shift==T){
 	  dat <- meanShift(dat, bat)
 	}
-	dat <- preproc(dat, method=procmeth,y=TIC_cls);
+	dat <- log10(dat+1)
+	dat <- TICnorm(dat)
 }
