@@ -1,18 +1,11 @@
-featSelection <- function(dat.all,dn,cls,pw,fs.method,fs.pars,nCores,Path,DF,srce){   # wrapper function for feature selection, includes parallelisation with both Rmpi and snow
-  if(!file.exists(paste(Path,DF,paste(DF,"Classification_&_Feature_Selection",sep="_"),sep="/"))){
-    dir.create(paste(Path,DF,paste(DF,"Classification_&_Feature_Selection",sep="_"),sep="/"))
-  }
+featSelection <- function(dat.all,cls,fs.method,fs.pars,nCores,pw=NULL){   # wrapper function for feature selection, includes parallelisation with both Rmpi and snow
+  dn <- names(dat.all)
   ncls = length(unique(cls))
   seq.1 = seq(1,ncls-1)
   npair = sum(seq.1)
-  cat(paste("No. classes:",ncls,"\n",sep=" "))
-  cat(paste("No. classes:",ncls,"\n",sep=" "),file=paste(Path,DF,paste(DF,"log-file.txt",sep="_"),sep="/"),append=T)
-  cat(paste("No. pairwise comparisons:", npair,"\n", sep=" "))
-  cat(paste("No. pairwise comparisons:", npair,"\n", sep=" "),file=paste(Path,DF,paste(DF,"log-file.txt",sep="_"),sep="/"),append=T)
   lapply(dn, function(i){
     gc()
     cat("\n-Data set = :",i,"\n")
-    cat("\n-Data set = :",i,"\n",file=paste(Path,DF,paste(DF,"log-file.txt",sep="_"),sep="/"),append=T)
     time1 <- FIEmspro:::timer_start()
     dat <- dat.all[[i]]
     dat.pair <- dat.sel(dat, cls, choices=pw)
@@ -29,34 +22,24 @@ featSelection <- function(dat.all,dn,cls,pw,fs.method,fs.pars,nCores,Path,DF,src
       fs.pair <- lapply(dat.1, function(x) {
         cat("\n--Pairwise = :",names(x)); flush.console()
         x <- data.frame(x)
-        my.mfs(x[,1:ncol(x)-1],x[,ncol(x)],fs.method, fs.pars)
+        mfs(x[,1:ncol(x)-1],x[,ncol(x)],fs.method, fs.pars)
       })
     } else {
-      library(parallel)
       clust = makeCluster(nCores,type="PSOCK")
-      fs.pair <- clusterApplyLB(clust, dat.1, fun=my.mfs.par,fs.method.1=fs.method,fs.pars.1=fs.pars,srce.1=srce)
+      clusterExport(clust,c(ls("package:FIEmspro"),ls("package:MASS"),ls("package:e1071"),ls("package:randomForest"),ls("package:OrbiFIEmisc")))
+      fs.pair <- clusterApplyLB(clust, dat.1, fun=mfs,fs.method=fs.method,fs.pars=fs.pars)
       stopCluster(clust)
-      cat('... done in ',FIEmspro:::timer_end(time1)$dt,"\n",sep="")
-      cat('... done in ',FIEmspro:::timer_end(time1)$dt,"\n",sep="",file=paste(Path,DF,paste(DF,"log-file.txt",sep="_"),sep="/"),append=T)
     }
     names(fs.pair) <- com
     fs.pair <- lapply(fs.pair,function(x){return(x[-which(names(x)=="all")])})
-    save(fs.pair, file=paste(Path,DF,paste(DF,"Classification_&_Feature_Selection",sep="_"),paste(DF,i,"fs_re_DO_NOT_DELETE.RData",sep="_"),sep="/"))
+    save(fs.pair, file=paste(i,"fs_re_DO_NOT_DELETE.RData",sep="_"))
   })
   fs.res <- NULL
   for (a in 1:length(dn)){
-    load(file=paste(Path,DF,paste(DF,"Classification_&_Feature_Selection",sep="_"),paste(DF,dn[a],"fs_re_DO_NOT_DELETE.RData",sep="_"),sep="/"))
+    load(file=paste(dn[a],"fs_re_DO_NOT_DELETE.RData",sep="_"))
     fs.res[a] <- list(fs.pair)
-    unlink(paste(Path,DF,paste(DF,"Classification_&_Feature_Selection",sep="_"),paste(DF,dn[a],"fs_re_DO_NOT_DELETE.RData",sep="_"),sep="/"))
+    unlink(paste(dn[a],"fs_re_DO_NOT_DELETE.RData",sep="_"))
   }
   names(fs.res) <- dn
-  save(fs.res, file=paste(Path,DF,paste(DF,"Classification_&_Feature_Selection",sep="_"),paste(DF,"fs_re.RData",sep="_"),sep="/"))
-  fs.order  <- lapply(fs.res, function(x) lapply(x, function(y) y$fs.order))
-  fs.rank  <- lapply(fs.res, function(x) lapply(x, function(y) y$fs.rank))
-  fs.ord   <- lapply(fs.rank, function(x) lapply(x, function(y) fs.agg(y)$fs.order))
-  stats.1 <- fsTab(fs.res)
-  for(i in 1:length(stats.1)){
-    write.csv(stats.1[[i]],file=paste(Path,DF,paste(DF,"Classification_&_Feature_Selection",sep="_"),paste(DF,names(stats.1)[i], "fs_stats_agg.csv",sep="_"),sep="/"),row.names = F)
-  }
   return(fs.res)
 }
