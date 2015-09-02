@@ -3,7 +3,6 @@ featSelection <- function(dat.all,cls,fs.method,fs.pars,nCores,pw=NULL){   # wra
   lapply(dn, function(i){
     gc()
     cat("\n-Data set = :",i,"\n")
-    time1 <- FIEmspro:::timer_start()
     dat <- dat.all[[i]]
     dat.pair <- dat.sel(dat, cls, choices=pw)
     com      <- apply(dat.pair$com, 1, paste, collapse="~")
