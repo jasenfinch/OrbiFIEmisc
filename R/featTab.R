@@ -1,20 +1,10 @@
-featTab <- function(x)
+featTab <- function(fs.stats,fs.pval)
 {
-  x <- as.matrix(x)
-  if (is.null(rownames(x)))
-    rownames(x) <- paste("R", 1:nrow(x),sep="")
-  if (is.null(colnames(x)))
-    colnames(x) <- paste("C", 1:ncol(x),sep="")
-  
-  fs <- rownames(x)
-  rank.tab <- lapply(as.data.frame(x), function(x){
-    fs.order <- order(x,decreasing=T, na.last=T)
-    fs.rank  <- order(fs.order)
-    df <- data.frame(rank=fs.rank, feature=fs, value=x)
-    rownames(df) <- 1:nrow(df)
-    df
-  })
-  
-  rank.tab  <- do.call("cbind",rank.tab)
-  rank.tab
+  methods <- names(fs.stats)
+  fs.tab <- lapply(methods,function(x,s,p){
+    stats <- data.frame(feature=rownames(s),score=s[,grep(x,colnames(s))],pvalue=p[,grep(x,colnames(p))],stringsAsFactors = F)
+    stats <- stats[order(stats$score,decreasing=T),]
+    return(stats)
+  },s=fs.stats,p=fs.pval)
+  return(fs.tab)
 }

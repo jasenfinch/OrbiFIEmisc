@@ -35,7 +35,7 @@ featRank <- function(x,y,method,pars=valipars(),tr.idx=NULL,...){
     res <- lapply(1:pars$nreps, function(j) {
       x.tr  <- x[train.ind[[j]],,drop=F]
       y.tr  <- y[train.ind[[j]]]
-      do.call(method, c(list(x=x.tr,y=y.tr), list(...)))
+      do.call(method, c(list(x=x.tr,y=y.tr)))
     })
     names(res) <- paste("Reps", 1:pars$nreps, sep="_")
     res
@@ -45,9 +45,14 @@ featRank <- function(x,y,method,pars=valipars(),tr.idx=NULL,...){
   rank.list  <- lapply(res.all, function(x) as.data.frame(sapply(x, function(y) y$fs.rank)))
   order.list <- lapply(res.all, function(x) as.data.frame(sapply(x, function(y) y$fs.order)))
   stats.list <- lapply(res.all, function(x) as.data.frame(sapply(x, function(y) y$stats)))
+  pval.list <- lapply(res.all, function(x) as.data.frame(sapply(x, function(y) y$pval)))
   rank.list  <- do.call("cbind",rank.list)
   order.list <- do.call("cbind",order.list)
   stats.list <- do.call("cbind",stats.list)
+  pval.list <- do.call("cbind",pval.list)
+  
+  fs.pval <- apply(pval.list, 1, mean)
+  fs.pval <- p.adjust(fs.pval,method = 'fdr')
   
   fs.stats   <- apply(stats.list, 1, mean)
   
@@ -57,10 +62,6 @@ featRank <- function(x,y,method,pars=valipars(),tr.idx=NULL,...){
   names(fs.rank) <- rownames(rank.list)
   temp     <- names(fs.rank[fs.order])
   if (!is.null(temp)) fs.order <- noquote(temp)
-  
-  res <- list(fs.order   = fs.order,
-              fs.rank    = fs.rank,
-              fs.stats   = fs.stats,
-              all        = res.all)
+  res <- list(fs.order = fs.order, fs.rank = fs.rank, fs.stats = fs.stats, fs.pval = fs.pval)
   return(res)
 }
