@@ -1,8 +1,5 @@
 featSelection <- function(dat.all,cls,fs.method,fs.pars,nCores,pw=NULL){   # wrapper function for feature selection, includes parallelisation with both Rmpi and snow
   dn <- names(dat.all)
-  ncls = length(unique(cls))
-  seq.1 = seq(1,ncls-1)
-  npair = sum(seq.1)
   lapply(dn, function(i){
     gc()
     cat("\n-Data set = :",i,"\n")
