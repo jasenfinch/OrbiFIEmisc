@@ -31,7 +31,6 @@ featSelection <- function(dat.all,cls,fs.method,fs.pars,nCores,pw=NULL){   # wra
       stopCluster(clust)
     }
     names(fs.pair) <- com
-    fs.pair <- lapply(fs.pair,function(x){return(x[-which(names(x)=="all")])})
     save(fs.pair, file=paste(i,"fs_re_DO_NOT_DELETE.RData",sep="_"))
   })
   fs.res <- NULL
