@@ -1,6 +1,7 @@
 language: r
 
 sudo: required
+bioc_required: true
 
 # System dependencies for HTTP calling
 apt_packages:
@@ -10,6 +11,10 @@ r_binary_packages:
  - RUnit
  - testthat
 
+bioc_packages:
+ - mzR
+ - impute
+ 
 # Install the bleeding edge version of a package from github (eg to pick
 # up a not-yet-released bugfix)
 r_github_packages:
