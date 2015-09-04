@@ -9,11 +9,13 @@ init:
         Import-Module '..\appveyor-tool.ps1'
 install:
   ps: Bootstrap
-  cmd: SET PATH=%JAVA_HOME%\bin;%PATH% 
+
 # Adapt as necessary starting from here
 
 build_script:
   - travis-tool.sh install_bioc BiocStyle
+  - travis-tool.sh install_bioc mzR
+  - travis-tool.sh install_bioc impute
   - travis-tool.sh install_bioc_deps
   - travis-tool.sh install_deps
   - ./travis-tool.sh install_github wilsontom/FIEmspro
