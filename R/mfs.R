@@ -1,8 +1,7 @@
-mfs <- function(x, fs.method,fs.pars,...){
-  x <- data.frame(x)
-  res <- lapply(fs.method, function(m) {
-    featRank(x[,1:ncol(x)-1],x[,ncol(x)],method=m,pars=fs.pars)
-  })
+mfs <- function(x, fs.method,fs.pars){
+  res <- lapply(fs.method, function(m,p,dat) {
+    featRank(dat[,1:ncol(dat)-1],dat[,ncol(dat)],method=m,pars=p)
+  },p=fs.pars,dat=x)
   fs.stats    <- as.data.frame(sapply(res,function(x) x$fs.stats))
   names(fs.stats) <- fs.method
   fs.pval <- sapply(res,function(x){if(length(x)>0){return(x$fs.pval)}})

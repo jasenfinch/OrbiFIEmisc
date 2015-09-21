@@ -6,24 +6,20 @@ featSelection <- function(dat.all,cls,fs.method,fs.pars,nCores,pw=NULL){   # wra
     dat <- dat.all[[i]]
     dat.pair <- dat.sel(dat, cls, choices=pw)
     com      <- apply(dat.pair$com, 1, paste, collapse="~")
-    dat.1<- NULL
-    for (z in 1:length(com)){
-      dat.com <- data.frame(dat.pair$dat[z],dat.pair$cl[z])
-      names(dat.com) <- names(dat.pair$dat[[z]])
-      dat.com <- as.matrix(dat.com)
-      dat.1[z] <- list(dat.com)
-    }
+    dat.1 <- lapply(com,function(x,dat){
+    	data <- data.frame(dat$dat[[x]],dat$cl[[x]])
+    	return(data)
+    },dat = dat.pair)
     names(dat.1) <- com
     if (nCores<2){
-      fs.pair <- lapply(dat.1, function(x) {
-        cat("\n--Pairwise = :",names(x)); flush.console()
-        x <- data.frame(x)
-        mfs(x[,1:ncol(x)-1],x[,ncol(x)],fs.method, fs.pars)
-      })
+      fs.pair <- lapply(com, function(x,dat) {
+        cat("\n--Pairwise = :",x,'\n'); flush.console()
+        mfs(dat[[x]],fs.method, fs.pars)
+      },dat =dat.1)
     } else {
       clust = makeCluster(nCores,type="PSOCK")
       clusterExport(clust,c(ls("package:FIEmspro"),ls("package:MASS"),ls("package:e1071"),ls("package:randomForest"),ls("package:OrbiFIEmisc")))
-      fs.pair <- clusterApplyLB(clust, dat.1, fun=mfs,fs.method=fs.method,fs.pars=fs.pars)
+      fs.pair <- parLapplyLB(clust, dat.1, fun=mfs,fs.method=fs.method,fs.pars=fs.pars)
       stopCluster(clust)
     }
     names(fs.pair) <- com
