@@ -2,11 +2,24 @@
 % Please edit documentation in R/occDrop.R
 \name{occDrop}
 \alias{occDrop}
-\title{drop variables with occupancy below percentage threshold}
+\title{Class occupancy filtering.}
 \usage{
-occDrop(peak.mat, cls, perc)
+occDrop(dat, cls, proportion)
+}
+\arguments{
+\item{dat}{A data.frame.}
+
+\item{cls}{A vector denoting the class of each observation in the data.frame dat.}
+
+\item{proportion}{The proportion threshold between 0 and 1, above which a varible must contain at least one class.}
+}
+\value{
+An occupancy filtered data.frame
 }
 \description{
-drop variables with occupancy below percentage threshold
+Drop variables without a maximum class occupancy above a given proportion.
+}
+\author{
+Jasen Finch
 }
 
