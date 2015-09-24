@@ -1,5 +1,12 @@
-TICnorm <- function(x){
-  x.sum <- rowSums(x)
-  x <- x/x.sum
-  return(x)
+#' Total Ion Count Normalisation.
+#' @name TICnorm
+#' @description Normalise FIE-HRMS spectra to their total ion count.
+#' @param dat A data.frame.
+#' @return A TIC normalised data.frame.
+#' @author Jasen Finch
+#' @export
+
+TICnorm <- function(dat){
+  dat <- x/rowSums(x)
+  return(dat)
 }
