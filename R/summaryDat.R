@@ -1,26 +1,15 @@
-#' Function for calculating confidence intervals and errors for plots
-
-summaryDat <-
-function(data=NULL, measurevar, groupvars=NULL, na.rm=FALSE,conf.interval=.95, .drop=TRUE) {
-  suppressMessages(require(plyr))
-  length2 <- function (x, na.rm=FALSE) {
-    if (na.rm) sum(!is.na(x))
-    else       length(x)
+summaryDat <- function(data,measurvar,groupvars,conf.interval=0.95){
+  if(length(groupvars)>1){
+    groups <- apply(data[,groupvars],1,paste,collapse = '-')
+  } else {
+    groups <- data[,groupvars]
   }
-  datac <- ddply(data, groupvars, .drop=.drop,
-                 .fun= function(xx, col, na.rm) {
-                   c( N    = length2(xx[,col], na.rm=na.rm),
-                      mean = mean   (xx[,col], na.rm=na.rm),
-                      sd   = sd     (xx[,col], na.rm=na.rm)
-                   )
-                 },
-                 measurevar,
-                 na.rm
-  )  
-  datac <- rename(datac, c("mean"=measurevar))
-  datac$se <- datac$sd / sqrt(datac$N)  # Calculate standard error of the mean
-  ciMult <- qt(conf.interval/2 + .5, datac$N-1)
-  datac$ci <- datac$se * ciMult
-  
-  return(datac)
+  n <- aggregate(data[,measurvar],list(groups),length)
+  mean <- aggregate(data[,measurvar],list(groups),mean)
+  sd <- aggregate(data[,measurvar],list(groups),sd)
+  se <- sd$x/sqrt(n$x)
+  ci <- se * qt(conf.interval/2 + .5, n$x-1)
+  groups <- n[,-which(colnames(n)=="x")]
+  res <- data.frame(groups,Mean=mean[,which(colnames(n)=="x")],SD=sd[,which(colnames(n)=="x")],SE=se,CI=ci,N=n[,which(colnames(n)=="x")])
+  return(res)
 }

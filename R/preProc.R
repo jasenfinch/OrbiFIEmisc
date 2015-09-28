@@ -14,5 +14,5 @@ preProc <- function(dat,cls,proportion,add=1){
   dat <- TICnorm(dat)
   dat <- occDrop(dat,cls,proportion)
   dat <- log10(dat+add)
-  return(dat)
+  return(data.frame(dat))
 }
