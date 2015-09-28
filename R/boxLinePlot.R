@@ -14,6 +14,7 @@ function(masses,dat,cls,h.group=NULL,v.group=NULL,type='b'){
     }
     return(p)
   },dat=dat,cls=cls,h=h.group,v=v.group)
+  names(plots) <- masses
   return(plots)
 }
   
