@@ -1,5 +1,5 @@
 boxLinePlot <-
-function(masses,dat,cls,h.group=NULL,v.group=NULL,type='b'){ 
+function(masses,dat,cls=NULL,h.group=NULL,v.group=NULL,type='b'){ 
   plots <- lapply(masses, function(m,dat,cls,h,v){
     if (type=="b"){
       p <- boxPlot(dat,cls,m)
@@ -10,7 +10,7 @@ function(masses,dat,cls,h.group=NULL,v.group=NULL,type='b'){
     if (type=="bl"){
       b <- boxPlot(dat,cls,m) 
       l <- linePlot(dat,h,v,m)
-      p <- grid.arrange(b,l)
+      p <- marrangeGrob(list(b,l),ncol=1,nrow=2) 
     }
     return(p)
   },dat=dat,cls=cls,h=h.group,v=v.group)
