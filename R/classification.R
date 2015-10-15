@@ -25,11 +25,11 @@ Classification <- function(dat.all,dn,cls,pw,cl.method,cl.pars,nCores,Path,DF,sr
     }
     names(dat.1) <- com
     if (nCores <2){
-      res.cl <- lapply(dat.1, function(x) {
-        cat("\n--Pairwise = :",names(x)); flush.console()
-        x <- data.frame(x)
-        my.mcl(x[,1:ncol(x)-1],x[,ncol(x)],cl.method, cl.pars)
-      })     
+      res.cl <- lapply(names(dat.1), function(x,dat) {
+        cat("\n--Pairwise = :",x); flush.console()
+        dat <- dat.1[[x]]
+        my.mcl(dat[,1:ncol(dat)-1],dat[,ncol(dat)],cl.method, cl.pars)
+      },dat=dat.1)     
     } else {
       library(parallel)	
       clust = makeCluster(nCores, type="PSOCK")
