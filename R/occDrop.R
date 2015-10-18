@@ -1,15 +1,16 @@
-#' drop variables with occupancy below percentage threshold
+#' Class occupancy filtering.
+#' @name occDrop
+#' @description Drop variables without a maximum class occupancy above a given proportion.
+#' @param dat A data.frame.
+#' @param cls A vector denoting the class of each observation in the data.frame dat.
+#' @param proportion The proportion threshold between 0 and 1, above which a varible must contain at least one class.
+#' @return An occupancy filtered data.frame
+#' @author Jasen Finch
+#' @export
 
-occDrop <-
-function(peak.mat,cls,perc){	
-	dat.1 <- NULL
-	for (i in 1:length(peak.mat)){
-	mat <- peak.mat[[i]]
-	mat.1 <- occMat(mat,cls)
-	min.occ <- apply(mat.1,2,min)
-	dat <- mat[,min.occ>perc]
-	dat.1[i] <- list(dat)
-	}
-	names(dat.1) <- names(peak.mat)
-	return(dat.1)
+occDrop <-function(dat,cls,proportion){	
+  mat <- occMat(dat,cls)
+  max.occ <- apply(mat,2,max)
+  dat <- dat[,which(max.occ>=proportion)]
+  return(dat)
 }
