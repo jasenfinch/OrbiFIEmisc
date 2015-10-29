@@ -1,7 +1,7 @@
 #' return lists of explanatory masses for each pairwise
 
 listsPrepSig <-
-function(fs.res,meth,sel,cut){
+function(fs.res,meth,cut,sel=NULL){
   stats <- lapply(fs.res,as.data.frame,stringsAsFactors=F)
   stats <- lapply(stats,function(x,m){x[grep(m,names(x))]},m=meth)
 	if(length(sel)>0){

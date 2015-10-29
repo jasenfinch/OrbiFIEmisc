@@ -4,7 +4,7 @@
 \alias{listsPrepSig}
 \title{return lists of explanatory masses for each pairwise}
 \usage{
-listsPrepSig(fs.res, meth, sel, cut)
+listsPrepSig(fs.res, meth, cut, sel = NULL)
 }
 \description{
 return lists of explanatory masses for each pairwise
