@@ -1,7 +1,7 @@
 #' Borda count of explanatory feature lists.
 
 bordaCount <-
-function (lists,dn,Path,DF){
+function (lists){
 	borda <- NULL
 	for (y in 1:length(lists)){
 		uni <- NULL
@@ -30,7 +30,6 @@ function (lists,dn,Path,DF){
 	count.mat.1 <- count.mat.1[order(count.mat.1[,ncol(count.mat.1)],decreasing=TRUE),]
 	names(count.mat.1)[1:ncol(list.1)] <- names(list.1)
 	borda[y] <- list(count.mat.1)
-	write.csv(count.mat.1,file=paste(Path,DF,paste(DF,"Borda_Count",sep="_"),paste(DF,dn[y],"borda_count.csv",sep="_"),sep="/"))
 	}
 	return (borda)
 }

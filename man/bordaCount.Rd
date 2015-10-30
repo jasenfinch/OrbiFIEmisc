@@ -4,7 +4,7 @@
 \alias{bordaCount}
 \title{Borda count of explanatory feature lists.}
 \usage{
-bordaCount(lists, dn, Path, DF)
+bordaCount(lists)
 }
 \description{
 Borda count of explanatory feature lists.
