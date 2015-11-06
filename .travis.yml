@@ -3,6 +3,9 @@ language: r
 sudo: required
 bioc_required: true
 
+sevices:
+ - docker
+
 # System dependencies for HTTP calling
 apt_packages:
  - default-jre
