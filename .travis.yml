@@ -1,26 +1,32 @@
-language: r
 
-sudo: required
-bioc_required: true
+language: c
 
-# System dependencies for HTTP calling
-apt_packages:
- - default-jre
- - default-jdk
- - libnetcdf-dev
- - udunits-bin
- - libudunits2-dev
- 
-r_binary_packages:
- - RUnit
- - testthat
+services:
+  - docker
 
-bioc_packages:
- - mzR
- - impute
- 
-# Install the bleeding edge version of a package from github (eg to pick
-# up a not-yet-released bugfix)
-r_github_packages:
- - wilsontom/FIEmspro
- - jasenfinch/OrbiFIEmisc
+before_install:
+  - curl -OL http://raw.github.com/jasenfinch/dotfiles/master/travis-tool.sh
+  - chmod 755 ./travis-tool.sh
+  - ./travis-tool.sh bootstrap
+  - sudo apt-get install -y libnetcdf-dev udunits-bin libudunits2-dev default-jre default-jdk
+
+install:
+  - ./travis-tool.sh install_bioc_deps
+  - ./travis-tool.sh install_github wilsontom/FIEmspro
+  
+script: 
+  - ./travis-tool.sh run_tests
+
+after_success:
+  - docker login -e="$DOCKER_EMAIL" -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
+  - git clone https://github.com/jasenfinch/HRM-docker.git
+  - docker build -t jasenfinch/hrm-docker ./HRM-docker
+  - docker push jasenfinch/hrm-docker
+
+after_failure:
+  - ./travis-tool.sh dump_logs
+
+notifications:
+  email:
+    on_success: change
+    on_failure: change
