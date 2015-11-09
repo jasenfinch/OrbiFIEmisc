@@ -4,8 +4,8 @@ Title: Miscellaneous functions for the analysis of FIE-HRMS data.
 Version: 1.0
 Date: 2015-05-28
 Author: Jasen Finch
-Maintainer: <jsf9@aber.ac.uk>
-Description: Miscellaneous functions for the analysis of FIE-HRMS data.
-License: What license is it under?
+Maintainer: Jasen Finch <jsf9@aber.ac.uk>
+Description: Miscellaneous functions for the analysis of FIE-HRMS data used in the Orbi_FIE workflow (https://github.com/jasenfinch/Orbi_FIE).
+License: GPL (>= 2)
 Depends: ggplot2, reshape2, parallel, FIEmspro, plyr
 Suggests: gridExtra, gplots
