@@ -1,6 +1,6 @@
 language: r
 
-sevices:
+services:
  - docker
 
 sudo: required
