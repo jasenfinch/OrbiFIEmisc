@@ -7,5 +7,13 @@ Author: Jasen Finch
 Maintainer: <jsf9@aber.ac.uk>
 Description: Miscellaneous functions for the analysis of FIE-HRMS data.
 License: What license is it under?
-Depends: ggplot2, reshape2, parallel, FIEmspro, plyr
-Suggests: gridExtra, gplots
+Depends:
+    ggplot2,
+    reshape2,
+    parallel,
+    FIEmspro,
+    plyr
+Suggests:
+    gridExtra,
+    gplots
+RoxygenNote: 5.0.0
