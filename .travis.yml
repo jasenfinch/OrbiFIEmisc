@@ -1,10 +1,10 @@
 language: r
 
-sudo: required
-bioc_required: true
-
 sevices:
  - docker
+
+sudo: required
+bioc_required: true
 
 # System dependencies for HTTP calling
 apt_packages:
