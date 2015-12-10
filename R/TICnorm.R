@@ -7,6 +7,6 @@
 #' @export
 
 TICnorm <- function(dat){
-  dat <- dat/rowSums(dat)
+  dat <- apply(dat,2,function(x,y){x/y},y=rowSums(dat))
   return(dat)
 }
