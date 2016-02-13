@@ -7,14 +7,14 @@
 \usage{
 TICnorm(dat)
 
-fs.rf2(train, cls, ...)
+fs.rf2(x, y, ...)
 }
 \arguments{
 \item{dat}{A data.frame.}
 
-\item{train}{training set data}
+\item{x}{training set data}
 
-\item{cls}{training set class labels}
+\item{y}{training set class labels}
 }
 \value{
 A TIC normalised data.frame.

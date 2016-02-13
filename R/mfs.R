@@ -13,5 +13,7 @@ mfs <- function(x, fs.method,fs.pars){
   fs.tab <- featTab(fs.stats,fs.pval)
   names(fs.tab) <- fs.method
   fs.tab <- as.data.frame(fs.tab)
-  return(fs.tab)
+  Forest_K <- sapply(res,function(x){if(length(x)>0){return(x$Forest_K)}})
+  names(Forest_K) <- fs.method
+  return(list(stats=fs.tab,Forest_K=Forest_K))
 }
