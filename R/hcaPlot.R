@@ -1,4 +1,5 @@
-
+#' hcaPlot
+#' @export
 
 hcaPlot <-
 function(dn,dat.all,cls,Path,DF,HPC_mode=F){

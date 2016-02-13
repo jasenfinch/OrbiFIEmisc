@@ -1,3 +1,6 @@
+#' pcaLoadings
+#' @export
+
 pcaLoadings <- function(pca.loadings,Path,DF,pcs=1:3,HPC_mode=F){
   dn <- unique(pca.loadings$type)
   for(i in 1:length(dn)){

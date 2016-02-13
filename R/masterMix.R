@@ -1,4 +1,5 @@
 #' Build mean intensity matrices  by class.
+#' @export
 
 masterMix <-
 function(peak.mat,cls){

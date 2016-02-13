@@ -1,4 +1,5 @@
-
+#' logRatio
+#' @export
 
 logRatio <-
 function(data,cls.treat,cls.time) {

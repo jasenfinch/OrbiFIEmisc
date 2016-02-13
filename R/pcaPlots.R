@@ -1,4 +1,5 @@
 #' pca plots using ggplot2
+#' @export
 
 pcaPlots <-
 function(pca.scores,pca.vars.1,PC.1,PC.2,Path,DF,cls.1=NULL,HPC_mode=F){

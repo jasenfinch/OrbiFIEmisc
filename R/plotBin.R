@@ -1,4 +1,5 @@
 #' Plot peak intensities for a 2dp mass bins for all classes
+#' @export
 
 plotBin <-
 function(master_mat,masses,Path,DF,HPC_mode=F){

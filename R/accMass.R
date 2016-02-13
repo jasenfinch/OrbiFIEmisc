@@ -1,4 +1,5 @@
 #' Collect accurate masses(5dp) for a given list of explanatory masses(2dp) based on the mosted intense signal
+#' @export
 
 accMass <-
 function(master_mat,cls,masses){		 

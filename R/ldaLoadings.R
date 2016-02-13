@@ -1,3 +1,6 @@
+#' ldaLoadings
+#' @export
+
 ldaLoadings <- function(lda.loadings,Path,DF,dfs=1:3,HPC_mode=F){
   dn <- unique(lda.loadings$type)
   for(i in 1:length(dn)){

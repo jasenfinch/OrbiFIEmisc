@@ -1,3 +1,6 @@
+#' Classification
+#' @export
+
 Classification <- function(dat.all,cls,cl.method,cl.pars,nCores,pw=NULL){
   dn <- names(dat.all)
   lapply(dn, function(i){

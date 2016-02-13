@@ -1,4 +1,5 @@
 #' Choose only significant features.
+#' @export
 
 listsSig <-
 function(stats.3,thres,meth){

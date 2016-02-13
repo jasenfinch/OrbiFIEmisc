@@ -1,4 +1,5 @@
 #' LDA plots using ggplot2
+#' @export
 
 ldaPlots <-
 function(lda.dfs,lda.eig,DF.1,DF.2,Path,DF,cls.1=NULL,HPC_mode=F){

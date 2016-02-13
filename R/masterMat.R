@@ -1,4 +1,5 @@
 #' to build mean intensity matrices  by class including nominal and 2dp bins
+#' @export
 
 masterMat <-
 function(master_mix,cls){

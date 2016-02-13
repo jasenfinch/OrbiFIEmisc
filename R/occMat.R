@@ -1,4 +1,5 @@
 #' builds occupancy matrix by class
+#' @export
 
 occMat <-
 function(dat,cls){

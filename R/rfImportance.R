@@ -1,4 +1,5 @@
 #' function to plot RF importance curves
+#' @export
 
 rfImportance <-
 function(fs.res,sel,Path,DF,meth="rf",HPC_mode=F){  	

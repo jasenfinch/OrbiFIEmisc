@@ -1,4 +1,5 @@
-
+#' outlierDet
+#' @export
 
 outlierDet <-
 function(dat.all,samp.names,HPC_mode=F){

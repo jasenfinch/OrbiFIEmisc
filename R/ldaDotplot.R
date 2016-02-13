@@ -1,4 +1,5 @@
 #' Eigenvalue dotplot using ggplot2
+#' @export
 
 ldaDotplot <-
 function(lda.eig,Path,DF,HPC_mode=F){

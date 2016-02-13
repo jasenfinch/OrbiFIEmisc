@@ -1,4 +1,5 @@
 #' PCA variance dotplot using ggplot2
+#' @export
 
 pcaDotplot <-
 function(pca.vars,Path,DF,HPC_mode=F){

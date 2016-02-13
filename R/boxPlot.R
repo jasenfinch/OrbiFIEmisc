@@ -1,3 +1,5 @@
+#' boxPlot
+#' @export
 
 boxPlot <-
 function(dat,cls,mass){ 

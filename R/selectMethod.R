@@ -1,4 +1,5 @@
 #' pick out individual method from agg feature lists
+#' @export
 
 selectMethod <-
 function(stats.1,meth){

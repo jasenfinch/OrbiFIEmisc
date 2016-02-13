@@ -1,4 +1,5 @@
-
+#' lda3d
+#' @export
 
 lda3d <-
 function(dn,dat.all,cls,info.class,info.genos){

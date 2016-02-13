@@ -1,3 +1,6 @@
+#' featTab
+#' @export
+
 featTab <- function(fs.stats,fs.pval)
 {
   methods <- names(fs.stats)

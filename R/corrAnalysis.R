@@ -1,4 +1,5 @@
-
+#' corrAnalysis
+#' @export
 
 corrAnalysis <-
 function(fs.ord,n,cutoff,Path,DF){

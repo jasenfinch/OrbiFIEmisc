@@ -1,4 +1,5 @@
-
+#' pcaComp
+#' @export
 
 pcaComp <-
 function(x, scale=FALSE, pcs=1:2,...)

@@ -1,4 +1,5 @@
-
+#' corVec
+#' @export
 
 corVec <- function(dat, fs.order, cutoff=0.75, fig=T, fig.title="Clus",...){
   fs <- fs.order

@@ -1,4 +1,5 @@
 #' correlation dendrogram of explanatory features based on all the data.
+#' @export
 
 corFeatures <-
 function(dat.all,masses){	

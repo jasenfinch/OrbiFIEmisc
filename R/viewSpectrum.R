@@ -1,4 +1,5 @@
 #' view zoom able spectrum. double click to zoom out. 2 single clicks over range to zoom in.
+#' @export
 
 viewSpectrum <-
 function(mat,class,mode,type="l"){ 

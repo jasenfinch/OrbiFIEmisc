@@ -1,3 +1,6 @@
+#' runClassification
+#' @export
+
 runClassification <- function(dat,cl.method, cl.pars,...) {
   results <- lapply(cl.method, function(m,p,dat) {
     cat("\nClassifier = :",m,"\n"); flush.console()

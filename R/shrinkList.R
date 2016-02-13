@@ -1,4 +1,5 @@
-
+#' shrinkList
+#' @export
 
 shrinkList <-
 function(x.list){

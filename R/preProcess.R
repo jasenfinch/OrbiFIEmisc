@@ -1,4 +1,5 @@
-
+#' preProcess
+#' @export
 
 preProcess <-
 function(x,cls=NULL,bat=NULL,out_id=NULL,out_idx=NULL,pre_SD=T,mean_shift=T){

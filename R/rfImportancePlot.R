@@ -1,4 +1,5 @@
 # Plotting function for rfImportance
+#'@export
 
 rfImportancePlot <-
 function(x,dn,Path,DF,HPC_mode=F){		

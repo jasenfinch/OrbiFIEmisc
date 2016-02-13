@@ -1,4 +1,5 @@
-
+#' pca3d
+#' @export
 
 pca3d <-
 function(dn,dat.all,cls,info.class) {

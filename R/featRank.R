@@ -1,3 +1,6 @@
+#' featRank
+#' @export
+
 featRank <- function(x,y,method,pars=valipars(),tr.idx=NULL,...){
   for (i in 1:ncol(x)){
     x[,i] <- as.numeric(as.character(x[,i]))

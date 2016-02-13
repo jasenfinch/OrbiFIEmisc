@@ -1,3 +1,6 @@
+#' reFormatClassi
+#' @export
+
 reFormatClassi <- function(aam){ 
   aam <- lapply(aam,function(x){
 

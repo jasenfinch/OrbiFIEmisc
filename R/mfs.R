@@ -1,3 +1,6 @@
+#' mfs
+#' @export
+
 mfs <- function(x, fs.method,fs.pars){
   res <- lapply(fs.method, function(m,p,dat) {
     featRank(dat[,1:ncol(dat)-1],dat[,ncol(dat)],method=m,pars=p)

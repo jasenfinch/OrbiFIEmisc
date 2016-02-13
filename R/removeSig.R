@@ -1,4 +1,5 @@
-
+#' removeSig
+#' @export
 
 removeSig <-
 function(peak.mat,out_path){ # remove top ranked signals
