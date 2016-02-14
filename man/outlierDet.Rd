@@ -4,7 +4,7 @@
 \alias{outlierDet}
 \title{outlierDet}
 \usage{
-outlierDet(dat.all, samp.names, HPC_mode = F)
+outlierDet(dat.all, samp.names)
 }
 \description{
 outlierDet

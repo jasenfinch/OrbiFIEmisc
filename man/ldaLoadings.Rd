@@ -4,7 +4,7 @@
 \alias{ldaLoadings}
 \title{ldaLoadings}
 \usage{
-ldaLoadings(lda.loadings, Path, DF, dfs = 1:3, HPC_mode = F)
+ldaLoadings(lda.loadings, Path, DF, dfs = 1:3)
 }
 \description{
 ldaLoadings

@@ -4,7 +4,7 @@
 \alias{ldaStrip}
 \title{Two class LDA plot using ggplot2}
 \usage{
-ldaStrip(lda.dfs, lda.eig, Path, DF, HPC_mode = F)
+ldaStrip(lda.dfs, lda.eig, Path, DF)
 }
 \description{
 Two class LDA plot using ggplot2

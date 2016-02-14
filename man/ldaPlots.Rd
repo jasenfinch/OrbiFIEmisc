@@ -4,7 +4,7 @@
 \alias{ldaPlots}
 \title{LDA plots using ggplot2}
 \usage{
-ldaPlots(lda.dfs, lda.eig, DF.1, DF.2, Path, DF, cls.1 = NULL, HPC_mode = F)
+ldaPlots(lda.dfs, lda.eig, DF.1, DF.2, Path, DF, cls.1 = NULL)
 }
 \description{
 LDA plots using ggplot2

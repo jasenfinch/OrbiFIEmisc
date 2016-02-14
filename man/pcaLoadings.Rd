@@ -4,7 +4,7 @@
 \alias{pcaLoadings}
 \title{pcaLoadings}
 \usage{
-pcaLoadings(pca.loadings, Path, DF, pcs = 1:3, HPC_mode = F)
+pcaLoadings(pca.loadings, Path, DF, pcs = 1:3)
 }
 \description{
 pcaLoadings

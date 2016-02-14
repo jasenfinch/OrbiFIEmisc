@@ -4,7 +4,7 @@
 \alias{ldaDotplot}
 \title{Eigenvalue dotplot using ggplot2}
 \usage{
-ldaDotplot(lda.eig, Path, DF, HPC_mode = F)
+ldaDotplot(lda.eig, Path, DF)
 }
 \description{
 Eigenvalue dotplot using ggplot2
