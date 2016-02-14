@@ -1,4 +1,5 @@
 #' wrapper function for LDA plotting, returns a list containg results.
+#' @export
 
 ldAnalysis <-
 function(dat.all,cls){

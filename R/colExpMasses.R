@@ -1,4 +1,5 @@
 #' collate all explanatory masses present in all lists. 
+#' @export
 
 colExpMasses <-
 function(x){  

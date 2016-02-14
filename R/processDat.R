@@ -1,4 +1,5 @@
-
+#' processDat
+#' @export
 
 processDat <-
 function(peak.mat,cls=NULL,bat=NULL,out_id=NULL,out_idx=NULL,nCores=2,pre_SD=T,mean_shift=T){

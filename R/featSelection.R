@@ -1,3 +1,6 @@
+#' featSelection
+#' @export
+
 featSelection <- function(dat.all,cls,fs.method,fs.pars,nCores,pw=NULL){   # wrapper function for feature selection, includes parallelisation with both Rmpi and snow
   dn <- names(dat.all)
   lapply(dn, function(i){

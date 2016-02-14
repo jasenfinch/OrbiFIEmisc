@@ -1,4 +1,5 @@
 #' Order importance scores of feature lists
+#' @export
 
 listsOrder <-
 function(stats.2) {

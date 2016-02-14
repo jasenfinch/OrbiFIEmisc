@@ -1,14 +1,10 @@
 #' PCA variance dotplot using ggplot2
+#' @export
 
-pcaDotplot <-
-function(pca.vars,Path,DF,HPC_mode=F){
+pcaDotplot <- function(pca.vars,Path,DF){
 	.e = environment()
 	pca.vars <- melt(t(pca.vars))
-	if (HPC_mode==T){
-		bitmap(paste(Path,DF,paste(DF,"PCA_&_LDA",sep="_"),paste(DF,"PCA_Variance.bmp" ,sep="_"),sep="/"))
-	} else {
-  	png(paste(Path,DF,paste(DF,"PCA_&_LDA",sep="_"),paste(DF,"PCA_Variance.png" ,sep="_"),sep="/"))
-	}
+  bitmap(paste(Path,DF,paste(DF,"PCA_&_LDA",sep="_"),paste(DF,"PCA_Variance.bmp" ,sep="_"),sep="/"))
 	pca.p.1 <- ggplot(pca.vars,aes(x=Var2,y=value,colour=Var1),environment=.e) +
 						 	geom_point(size=3,aes(shape=Var1)) +
 						  coord_flip() +

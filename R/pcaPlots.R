@@ -1,17 +1,14 @@
 #' pca plots using ggplot2
+#' @export
 
 pcaPlots <-
-function(pca.scores,pca.vars.1,PC.1,PC.2,Path,DF,cls.1=NULL,HPC_mode=F){
+function(pca.scores,pca.vars.1,PC.1,PC.2,Path,DF,cls.1=NULL){
 	.e = environment()
 	dn <- unique(pca.scores$type)
 	for (i in 1:length(dn)){
 		sub.pca <- subset(pca.scores, pca.scores$type == dn[i] )
 		sub.pca <- sub.pca[,c(PC.1,PC.2,"cls","type")]
-		if (HPC_mode==T){
-				bitmap(paste(Path,DF,paste(DF,"PCA_&_LDA",sep="_"),paste(DF,dn[i],PC.1,PC.2,"PCA.bmp" ,sep="_"),sep="/"))
-			} else {
-				png(paste(Path,DF,paste(DF,"PCA_&_LDA",sep="_"),paste(DF,dn[i],PC.1,PC.2,"PCA.png" ,sep="_"),sep="/"))
-			}
+		bitmap(paste(Path,DF,paste(DF,"PCA_&_LDA",sep="_"),paste(DF,dn[i],PC.1,PC.2,"PCA.bmp" ,sep="_"),sep="/"))
 		if (is.null(cls.1)){
 			plot.1 <- ggplot(sub.pca, aes(x = sub.pca[,PC.1], y = sub.pca[,PC.2], colour=sub.pca$cls), environment=.e) + 
 				geom_point(size=2,aes(shape=sub.pca$cls)) + #

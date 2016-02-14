@@ -1,4 +1,5 @@
 #' changed so that actual sample labels used
+#' @export
 
 outDet <-
 function(x,samp.names, method = "classical", conf.level = 0.975, dimen=c(1,2), tol = 1e-7, plotting = TRUE){ 

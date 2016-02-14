@@ -1,3 +1,6 @@
+#' boxLinePlot
+#' @export
+
 boxLinePlot <-
 function(masses,dat,cls=NULL,h.group=NULL,v.group=NULL,type='b'){ 
   plots <- lapply(masses, function(m,dat,cls,h,v){

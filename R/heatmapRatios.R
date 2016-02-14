@@ -1,4 +1,5 @@
 #' Plot heatmap of log2 ratios treatments 
+#' @export
 
 heatmapRatios <-
 function(data,masses,cls.treat,cls.time,rel=T){

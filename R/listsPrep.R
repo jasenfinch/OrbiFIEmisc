@@ -1,4 +1,5 @@
-
+#' listsPrep
+#' @export
 
 listsPrep <-
 function(fs.res,meth,sel,cut){

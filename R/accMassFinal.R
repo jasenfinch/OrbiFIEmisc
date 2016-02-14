@@ -1,4 +1,5 @@
 #' Make final accurate mass matrix from acc_mat using the most intense mass
+#' @export
 
 accMassFinal <-
 function(acc_mat){		# 

@@ -1,4 +1,5 @@
 #' wrapper function for principle component analysis, returns a list containg results
+#' @export
 
 pcAnalysis <- function(dat.all,cls){
 	dn <- names(dat.all)

@@ -1,4 +1,5 @@
-
+#' preprocSD
+#' @export
 
 preprocSD <-
 function(dat, cl=NULL)

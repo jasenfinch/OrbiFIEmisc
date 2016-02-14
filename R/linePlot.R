@@ -1,4 +1,5 @@
-
+#' linePlot
+#' @export
 
 linePlot <-
 function(dat,h.group,v.group,mass){

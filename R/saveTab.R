@@ -1,4 +1,5 @@
-
+#' saveTab
+#' @export
 
 saveTab <- function(x, filename="temp.csv", firstline="\n"){
   options(warn=-1)

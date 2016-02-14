@@ -1,16 +1,12 @@
 #' Eigenvalue dotplot using ggplot2
+#' @export
 
-ldaDotplot <-
-function(lda.eig,Path,DF,HPC_mode=F){
+ldaDotplot <- function(lda.eig,Path,DF){
   dn <- rownames(lda.eig)
 	.e = environment()
 	lda.eig <- t(lda.eig)
 	lda.eig <- melt(lda.eig)
-	if (HPC_mode==T){
-		bitmap(paste(Path,DF,paste(DF,"PCA_&_LDA",sep="_"),paste(DF,"LDA_Eigenvalues.bmp" ,sep="_"),sep="/"))
-	} else {
-  	png(paste(Path,DF,paste(DF,"PCA_&_LDA",sep="_"),paste(DF,"LDA_Eigenvalues.png" ,sep="_"),sep="/"))
-	}
+	bitmap(paste(Path,DF,paste(DF,"PCA_&_LDA",sep="_"),paste(DF,"LDA_Eigenvalues.bmp" ,sep="_"),sep="/"))
 	lda.p.1 <- ggplot(lda.eig,aes(x=Var2,y=value,colour=Var1),environment=.e) +
 						 	geom_point(size=3,aes(shape=Var1)) +
 						  coord_flip() +

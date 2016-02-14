@@ -1,4 +1,5 @@
 #' return lists of explanatory masses for each pairwise
+#' @export
 
 listsPrepSig <-
 function(fs.res,meth,cut,sel=NULL){

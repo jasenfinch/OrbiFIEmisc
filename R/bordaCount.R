@@ -1,4 +1,5 @@
 #' Borda count of explanatory feature lists.
+#' @export
 
 bordaCount <-
 function (lists){

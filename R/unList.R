@@ -1,4 +1,5 @@
-
+#' unList
+#' @export
 
 unList <- function(x, y=""){
   res <- list()

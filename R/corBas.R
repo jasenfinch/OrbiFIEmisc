@@ -1,4 +1,5 @@
-
+#' corBas
+#' @export
 
 corBas <- function(mat, cutoff=0.75,fig=T,...){
   fs.cor <- cor(mat)

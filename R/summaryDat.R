@@ -1,3 +1,6 @@
+#' summaryDat
+#' @export
+
 summaryDat <- function(data,measurvar,groupvars,conf.interval=0.95){
   if(length(groupvars)>1){
     groups <- apply(data[,groupvars],1,paste,collapse = '-')

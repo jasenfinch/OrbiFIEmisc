@@ -1,4 +1,5 @@
-
+#' meanShift
+#' @export
 
 meanShift <-
 function(x,y, method="mean", log.f=FALSE)

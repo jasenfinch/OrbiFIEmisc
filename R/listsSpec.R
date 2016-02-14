@@ -1,4 +1,5 @@
 #' Select specific feature lists
+#' @export
 
 listsSpec <-
 function (stats.3,sel){
