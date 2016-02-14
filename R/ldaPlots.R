@@ -2,16 +2,12 @@
 #' @export
 
 ldaPlots <-
-function(lda.dfs,lda.eig,DF.1,DF.2,Path,DF,cls.1=NULL,HPC_mode=F){
+function(lda.dfs,lda.eig,DF.1,DF.2,Path,DF,cls.1=NULL){
   dn <- unique(lda.dfs$type)
 	.e = environment()
 	for (i in 1:length(dn)){
 		sub.lda <- subset(lda.dfs, lda.dfs$type == dn[i] )
-		if (HPC_mode==T){
-				bitmap(paste(Path,DF,paste(DF,"PCA_&_LDA",sep="_"),paste(DF,dn[i],DF.1,DF.2,"LDA.bmp" ,sep="_"),sep="/"))
-			} else {
-				png(paste(Path,DF,paste(DF,"PCA_&_LDA",sep="_"),paste(DF,dn[i],DF.1,DF.2,"LDA.png" ,sep="_"),sep="/"))
-			}
+		bitmap(paste(Path,DF,paste(DF,"PCA_&_LDA",sep="_"),paste(DF,dn[i],DF.1,DF.2,"LDA.bmp" ,sep="_"),sep="/"))
 		if (is.null(cls.1)){
 			plot.1 <- ggplot(sub.lda, aes(x = sub.lda[,DF.1], y = sub.lda[,DF.2], colour=sub.lda$y), environment=.e) + 
 				geom_point(size=2,aes(shape=sub.lda$y)) + #

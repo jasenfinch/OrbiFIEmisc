@@ -1,7 +1,7 @@
 #' pcaLoadings
 #' @export
 
-pcaLoadings <- function(pca.loadings,Path,DF,pcs=1:3,HPC_mode=F){
+pcaLoadings <- function(pca.loadings,Path,DF,pcs=1:3){
   dn <- unique(pca.loadings$type)
   for(i in 1:length(dn)){
     loadings <- pca.loadings[which(pca.loadings$type==dn[i]),]
@@ -13,11 +13,7 @@ pcaLoadings <- function(pca.loadings,Path,DF,pcs=1:3,HPC_mode=F){
     }
     for (k in pcs){
       data <- data.frame(mz,loading=as.numeric(loadings[,k]),type=loadings$type)
-      if (HPC_mode==T){
-        bitmap(paste(Path,DF,paste(DF,"PCA_&_LDA",sep="_"),paste(DF,dn[i],paste("PC",k,sep=""),"Loadings.bmp" ,sep="_"),sep="/"))
-      } else {
-        png(paste(Path,DF,paste(DF,"PCA_&_LDA",sep="_"),paste(DF,dn[i],paste("PC",k,sep=""),"Loadings.png" ,sep="_"),sep="/"))
-      }
+      bitmap(paste(Path,DF,paste(DF,"PCA_&_LDA",sep="_"),paste(DF,dn[i],paste("PC",k,sep=""),"Loadings.bmp" ,sep="_"),sep="/"))
       print(ggplot(data,aes(x=mz,y=loading)) + 
         geom_point(colour="#3399FF",stat="identity") +
         ylab(paste("PC",k,sep="")) +
