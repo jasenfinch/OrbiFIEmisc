@@ -10,12 +10,12 @@
 
 
 
-`fs.rf2` <- function(x,y,...)
+`fs.rf2` <- function(x,y,nTree=1000,...)
   {
     set.seed(1234)
-    model <- randomForest(x, y, keep.forest = TRUE,proximity = TRUE, importance = TRUE,...)
+    model <- randomForest(x, y, ntree = nTree,keep.forest = TRUE,proximity = TRUE, importance = TRUE,...)
     Imp <- Importance(model, x)
-    kval <- binaryTests(model)
+    kval <- round(mean(apply(model$forest$nodestatus,2,function(x){length(which(x==1))})),0)
   
     meas <- Imp$SF$Frequency
     names(meas) <- Imp$SF$Feature
@@ -29,6 +29,8 @@
     if (!is.null(nam))
       fs.order <- noquote(nam)
     
-    res <- list(fs.rank=fs.rank, fs.order=fs.order, stats=meas,Forest_K=kval)
+    FPR <- sapply(meas,selectionFrequencyFPR,kval,nTree,length(meas))
+    
+    res <- list(fs.rank=fs.rank, fs.order=fs.order, stats=meas,pval=FPR)
     return(res)
   }

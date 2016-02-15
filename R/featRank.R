@@ -53,17 +53,12 @@ featRank <- function(x,y,method,pars=valipars(),tr.idx=NULL,...){
   order.list <- do.call("cbind",order.list)
   stats.list <- do.call("cbind",stats.list)
   pval.list <- do.call("cbind",pval.list)
-  if(method=='fs.rf2'){
-  Forest_K <- lapply(res.all,function(x){sapply(x,function(y){y$Forest_K})})
-  Forest_K <- do.call("cbind",Forest_K)
-  Forest_K <- apply(Forest_K,1,mean)
-  Forest_K <- round(mean(Forest_K),0)
-  } else {
-    Forest_K <- NA
-  }
-  fs.pval <- apply(pval.list, 1, mean)
-  fs.pval <- p.adjust(fs.pval,method = 'fdr')
   
+  fs.pval <- apply(pval.list, 1, mean)
+  if(method != 'fs.rf2'){
+    fs.pval <- p.adjust(fs.pval,method = 'fdr')
+  }
+
   fs.stats   <- apply(stats.list, 1, mean)
   
   fs.score  <- apply(rank.list,1,sum)
@@ -72,6 +67,6 @@ featRank <- function(x,y,method,pars=valipars(),tr.idx=NULL,...){
   names(fs.rank) <- rownames(rank.list)
   temp     <- names(fs.rank[fs.order])
   if (!is.null(temp)) fs.order <- noquote(temp)
-  res <- list(fs.order = fs.order, fs.rank = fs.rank, fs.stats = fs.stats, fs.pval = fs.pval, Forest_K=Forest_K)
+  res <- list(fs.order = fs.order, fs.rank = fs.rank, fs.stats = fs.stats, fs.pval = fs.pval)
   return(res)
 }

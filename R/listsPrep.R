@@ -10,7 +10,7 @@ function(fs.res,meth,sel,cut){
 	}
 	stats <- lapply(stats,function(x){
 	  if (length(grep('pvalue',names(x)))>0){
-	   x <- x[,-grep('pvalue',names(x))]
+	   x <- x[,-grep('score',names(x))]
 	  }
 	  return(x)
 	  })

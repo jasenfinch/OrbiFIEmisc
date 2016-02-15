@@ -10,7 +10,7 @@ function(stats.3,thres,meth){
     n[,1] <- as.character(n[,1])
     n[,2] <- as.numeric(as.character(n[,2]))
 	  a <- n[,2]
- 	  if(meth=="anova"|meth=="welch"|meth=="kruskal"){
+ 	  if(meth=="anova"|meth=="welch"|meth=="kruskal"|meth=='rf2'){
 		  a[a > thres] <- NA
  	  }else{
  		  a[a < thres] <- NA

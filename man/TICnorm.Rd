@@ -7,7 +7,7 @@
 \usage{
 TICnorm(dat)
 
-fs.rf2(x, y, ...)
+fs.rf2(x, y, nTree = 1000, ...)
 }
 \arguments{
 \item{dat}{A data.frame.}
