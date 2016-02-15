@@ -17,22 +17,24 @@
     Imp <- Importance(model, x)
     kval <- round(mean(apply(model$forest$nodestatus,2,function(x){length(which(x==1))})),0)
   
-    meas <- Imp$SF
+    meas <- Imp$SF$Frequency
+    names(meas) <- Imp$SF$Feature
     
-    fs.rank <- rank(-meas$Frequency, na.last=T, ties.method="random")
-    names(fs.rank) <- meas$Feature
+    fs.rank <- rank(-meas, na.last=T, ties.method="random")
+    names(fs.rank) <- Imp$SF$Feature
     
     fs.order <- order(fs.rank, na.last=T)
     
-    nam <- meas$Feature[fs.order]
+    nam <- meas[fs.order]
     if (!is.null(nam))
       fs.order <- noquote(nam)
 
-    FPR <- sapply(sort(unique(meas$Frequency)),selectionFrequencyFPR,K=kval,Tr=nTree,Ft=nrow(meas))
-    FPR.pos <- match(meas$Frequency,sort(unique(meas$Frequency)))
+    FPR <- sapply(sort(unique(meas)),selectionFrequencyFPR,K=kval,Tr=nTree,Ft=length(meas))
+    FPR.pos <- match(meas,sort(unique(meas)))
     for (i in 1:length(FPR)){
       FPR.pos[which(FPR.pos==i)] <- FPR[i]
     }
+    names(FPR.pos) <- Imp$SF$Feature
     
     res <- list(fs.rank=fs.rank, fs.order=fs.order, stats=meas,pval=FPR.pos)
     return(res)
