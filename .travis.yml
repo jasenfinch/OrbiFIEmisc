@@ -26,6 +26,8 @@ bioc_packages:
 # up a not-yet-released bugfix)
 r_github_packages:
  - wilsontom/FIEmspro
+ - wilsontom/FIEtools
+ - wilsontom/metRF
  - jasenfinch/OrbiFIEmisc
 
 after_success:
