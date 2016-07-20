@@ -2,7 +2,7 @@
 #' @export
 
 outlierDet <-
-function(dat.all,samp.names){
+function(dat.all,samp.names,Path,DF){
   dat.p   <- prcomp(dat.all[["Positive_Mode"]],scale=FALSE)$x
   dat.n   <- prcomp(dat.all[["Negative_Mode"]],scale=FALSE)$x
   bitmap(paste(Path,DF,paste(DF,"Positive_Mode","outlier_detection.bmp",sep="_"),sep="/"))

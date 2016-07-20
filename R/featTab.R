@@ -5,8 +5,8 @@ featTab <- function(fs.stats,fs.pval)
 {
   methods <- names(fs.stats)
   fs.tab <- lapply(methods,function(x,s,p){
-  	if(length(p)>0){
-    	stats <- data.frame(feature=rownames(s),score=s[,colnames(s) %in% x],pvalue=p[,x %in% colnames(p)],stringsAsFactors = F)
+  	if(ncol(p)>0){
+    	stats <- data.frame(feature=rownames(s),score=s[,colnames(s) %in% x],pvalue=p[,colnames(p) %in% x],stringsAsFactors = F)
   	} else {
   		stats <- data.frame(feature=rownames(s),score=s[,colnames(s) %in% x],stringsAsFactors = F)
   	}

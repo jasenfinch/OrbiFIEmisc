@@ -4,7 +4,7 @@
 \alias{outlierDet}
 \title{outlierDet}
 \usage{
-outlierDet(dat.all, samp.names)
+outlierDet(dat.all, samp.names, Path, DF)
 }
 \description{
 outlierDet
