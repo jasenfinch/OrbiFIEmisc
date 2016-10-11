@@ -5,7 +5,6 @@
 #' @param y training set class labels
 #' @return A list containing selection frequency feature selection results
 #' @author Jasen Finch
-#' @import metRF
 #' @export
 
 
