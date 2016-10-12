@@ -6,6 +6,7 @@
 #' @return A list containing selection frequency feature selection results
 #' @author Jasen Finch
 #' @export
+#' @import metRF
 
 
 
