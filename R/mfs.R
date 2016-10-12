@@ -9,7 +9,9 @@ mfs <- function(x, fs.method,fs.pars){
   names(fs.stats) <- fs.method
   fs.pval <- sapply(res,function(x){x$fs.pval})
   nullPval <- which(sapply(fs.pval,length)==0)
-  fs.pval <- fs.pval[-nullPval]
+  if(length(nullPval)>0){
+    fs.pval <- fs.pval[-nullPval]
+  }
   fs.pval <- as.data.frame(fs.pval)
   names(fs.pval) <- fs.method[-nullPval]
   fs.tab <- featTab(fs.stats,fs.pval)
